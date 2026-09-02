@@ -1,0 +1,25 @@
+EXACT DEGREE-3 IDENTITY CHECK: PASS
+harmonic Laplacian                       = 0
+integral |A_Y|^2 / (pi*tau)             = 176/7
+tau^2 coefficient in integral q^2 / pi  = 555264/1001
+|B0|^2 coefficient in integral q^2 / pi = -2265600/1001
+determinant ratio                        = 15183/17303
+candidate volume coefficient             = -pi*(-407407 + 81*sqrt(241241))/3010722
+candidate decimal                        = 0.383602704709067716
+Nishioka decimal                         = 0.380799109526035544
+absolute improvement                     = 0.00280359518303217149
+ALTERNATIVE COMPACT-FORM CHECK: PASS
+projected determinant equals compact determinant modulo x^2+y^2+z^2-1
+compact determinant integration reproduces the invariant identity exactly
+BOUND ARITHMETIC CHECK: PASS
+energy coefficient E/d^2 <= pi*(27*sqrt(241241) + 31460)/501787
+candidate volume coefficient = -pi*(-407407 + 81*sqrt(241241))/3010722
+candidate decimal            = 0.38360270470906771555
+Nishioka decimal             = 0.38079910952603554406
+Meissner decimal              = 0.41986004596508022334
+improvement over Nishioka     = 0.0028035951830321714945
+NUMERICAL STRESS TESTS: PASS
+maximum pointwise determinant error = 1.819e-12
+maximum norm relative error          = 2.829e-15
+maximum q^2 relative error           = 3.427e-15
+maximum invariant rotation error     = 2.274e-13

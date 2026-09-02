@@ -1,0 +1,8 @@
+R NUMERICAL STRESS TESTS: PASS
+maximum pointwise determinant error = 2.046e-12
+maximum norm relative error          = 2.038e-15
+maximum q^2 relative error           = 5.107e-15
+candidate coefficient                = 0.383602704709068
+
+Provenance: output supplied by Bruce Swihart on 2026-09-02 after running
+R/numerical_stress_tests.R in his local R environment. The R script uses base R only.
