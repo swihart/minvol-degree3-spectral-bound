@@ -33,23 +33,26 @@ possible contribution is the independent degree-3 spectral mechanism.
   `expected/CROSS_LANGUAGE_COMPARISON.md`.
 - The final coefficient is simplified and evaluated exactly.
 - The noncomputational bridge from the determinant estimate to the candidate
-  volume bound now has a line-by-line draft in `proof/BRIDGE_LEMMAS.md`.
+  volume bound has a line-by-line draft in `proof/BRIDGE_LEMMAS.md`.
+- The degree-3 tensor identity now has a human-readable derivation in
+  `proof/DEGREE3_TENSOR_IDENTITY.md`, including a contraction-graph count for
+  all six quartic moments.
+- The contraction-graph table is independently enumerated by exact Python code;
+  a matching base-R script is included for cross-language checking.
 
 ## What remains before public release
 
-- Write a human-readable derivation of the degree-3 tensor identities that
-  matches the exact symbolic scripts.
-- Audit the new bridge-lemma draft line by line and incorporate it into the
-  paper source.
-- Preserve clean command-line R output and R session metadata.
+- Run and preserve the new base-R pairing-count output and R session metadata.
+- Audit both proof drafts line by line and incorporate them into the paper
+  source.
 - Add automated continuous integration.
 - Add the paper source, bibliography, AI-assistance statement, and verification
   status statement.
 - Obtain outside mathematical review after the first public research-draft
   release.
 
-See `proof/PROOF_LEDGER.md`, `proof/CLAIM_DEPENDENCIES.md`, and
-`proof/BRIDGE_LEMMAS.md`.
+See `proof/PROOF_LEDGER.md`, `proof/CLAIM_DEPENDENCIES.md`,
+`proof/BRIDGE_LEMMAS.md`, and `proof/DEGREE3_TENSOR_IDENTITY.md`.
 
 ## Run the exact Python checks
 
@@ -65,6 +68,7 @@ The exact symbolic scripts are:
 - `python/verify_degree3_identity.py`
 - `python/verify_degree3_identity_alt.py`
 - `python/verify_bound_arithmetic.py`
+- `python/verify_pairing_counts.py`
 
 The numerical stress test is:
 
@@ -72,14 +76,16 @@ The numerical stress test is:
 
 ## Run the R cross-check
 
-The R script uses base R only:
+The R scripts use base R only:
 
 ```sh
+Rscript R/verify_pairing_counts.R
 Rscript R/numerical_stress_tests.R
 ```
 
-The R script is an independent numerical cross-check. The exact symbolic
-verification is performed by the Python/SymPy scripts.
+The first script independently checks the finite pairing-count table; the second
+is an independent numerical tensor cross-check. The general exact symbolic
+integration is performed by the Python/SymPy scripts.
 
 ## Current verification language
 

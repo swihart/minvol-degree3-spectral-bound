@@ -3,6 +3,7 @@ harmonic Laplacian                       = 0
 integral |A_Y|^2 / (pi*tau)             = 176/7
 tau^2 coefficient in integral q^2 / pi  = 555264/1001
 |B0|^2 coefficient in integral q^2 / pi = -2265600/1001
+quartic relation K = tau^2/2 - tr(B^2)  = verified
 determinant ratio                        = 15183/17303
 candidate volume coefficient             = -pi*(-407407 + 81*sqrt(241241))/3010722
 candidate decimal                        = 0.383602704709067716
@@ -11,6 +12,17 @@ absolute improvement                     = 0.00280359518303217149
 ALTERNATIVE COMPACT-FORM CHECK: PASS
 projected determinant equals compact determinant modulo x^2+y^2+z^2-1
 compact determinant integration reproduces the invariant identity exactly
+PAIRING-COUNT CHECK
+Y^4               D= 108 J=1944 K=1296 => tau^2= 756, J= 648
+Y^2|v|^2          D=  12 J= 216 K= 144 => tau^2=  84, J=  72
+Y^2|M|^2          D=   6 J=  36 K=   0 => tau^2=   6, J=  36
+|v|^4             D=   4 J=  40 K=  16 => tau^2=  12, J=  24
+|v|^2|M|^2        D=   2 J=   8 K=   0 => tau^2=   2, J=   8
+|M|^4             D=   1 J=   2 K=   0 => tau^2=   1, J=   2
+q^2 / pi coefficient of tau^2 = 1310464/1001
+q^2 / pi coefficient of J     = -2265600/1001
+B0-form coefficient of tau^2  = 555264/1001
+PAIRING-COUNT CHECK: PASS
 BOUND ARITHMETIC CHECK: PASS
 energy coefficient E/d^2 <= pi*(27*sqrt(241241) + 31460)/501787
 candidate volume coefficient = -pi*(-407407 + 81*sqrt(241241))/3010722

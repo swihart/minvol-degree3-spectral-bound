@@ -1,0 +1,10 @@
+R PAIRING-COUNT CHECK
+Y^4               D= 108 J=1944 K=1296 => tau^2= 756, J= 648
+Y^2|v|^2          D=  12 J= 216 K= 144 => tau^2=  84, J=  72
+Y^2|M|^2          D=   6 J=  36 K=   0 => tau^2=   6, J=  36
+|v|^4             D=   4 J=  40 K=  16 => tau^2=  12, J=  24
+|v|^2|M|^2        D=   2 J=   8 K=   0 => tau^2=   2, J=   8
+|M|^4             D=   1 J=   2 K=   0 => tau^2=   1, J=   2
+R PAIRING-COUNT CHECK: PASS
+
+Provenance: generated locally by run_r_checks.sh.

@@ -55,10 +55,11 @@ theorem.
      \le \frac{15183}{17303\pi}\|C\|_2^4.
      \]
 
-   - Exact symbolic verification exists in
-     `python/verify_degree3_identity.py` and
+   - Human-readable derivation: `proof/DEGREE3_TENSOR_IDENTITY.md`.
+   - Exact symbolic verification: `python/verify_degree3_identity.py` and
      `python/verify_degree3_identity_alt.py`.
-   - A human-readable derivation is the principal remaining internal proof task.
+   - Exact contraction-graph count: `python/verify_pairing_counts.py`, with a
+     matching base-R implementation in `R/verify_pairing_counts.R`.
 
 4. **Operator/nuclear-norm bridge**
    - For a symmetric `2 x 2` matrix,

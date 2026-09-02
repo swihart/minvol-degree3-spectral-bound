@@ -3,9 +3,9 @@
 ## Status
 
 This file gives a line-by-line proof of the **noncomputational bridge** from the
-new degree-3 determinant estimate to the proposed volume bound.  It does not
-prove the determinant estimate itself; that remains the central algebraic lemma
-and is isolated explicitly below.
+new degree-3 determinant estimate to the proposed volume bound.  The determinant
+estimate itself is proved in `proof/DEGREE3_TENSOR_IDENTITY.md`; it is isolated
+as a named input below so that the logical dependency remains explicit.
 
 The argument is for smooth support functions first and then passes to arbitrary
 convex bodies of constant width by Nishioka's smooth-approximation lemma.
@@ -73,9 +73,9 @@ N_3:=\|C\|_2^2.
 \tag{1.3}
 \]
 
-The proof below uses the following central degree-3 estimate, whose exact
-symbolic verification is already implemented in the repository and whose
-human-readable derivation is to be supplied separately.
+The proof below uses the following central degree-3 estimate.  A human-readable
+derivation is in `proof/DEGREE3_TENSOR_IDENTITY.md`, and two exact symbolic
+implementations are in the repository.
 
 **Degree-3 determinant estimate.** For every \(Y\in\mathcal H_3\), with
 \(C=A_Y\) and determinant taken on the tangent plane,

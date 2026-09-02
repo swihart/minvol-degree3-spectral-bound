@@ -170,6 +170,26 @@ def main() -> None:
     )
     b0 = contraction_b - sp.eye(3) * tau / 3
     b0_sq = sp.expand(sp.trace(b0 * b0))
+    j_invariant = sp.expand(sp.trace(contraction_b * contraction_b))
+    tetrahedral = sp.expand(
+        sum(
+            tensor[a, b, c]
+            * tensor[a, d, e]
+            * tensor[b, d, f]
+            * tensor[c, e, f]
+            for a in range(3)
+            for b in range(3)
+            for c in range(3)
+            for d in range(3)
+            for e in range(3)
+            for f in range(3)
+        )
+    )
+    quartic_relation_residual = sp.expand(
+        tetrahedral - sp.Rational(1, 2) * tau**2 + j_invariant
+    )
+    if quartic_relation_residual != 0:
+        raise AssertionError("The dimension-three quartic relation failed.")
 
     norm_coefficient = derive_scalar_multiple(
         integrated_norm_without_pi, tau, params
@@ -198,6 +218,7 @@ def main() -> None:
     print(f"integral |A_Y|^2 / (pi*tau)             = {norm_coefficient}")
     print(f"tau^2 coefficient in integral q^2 / pi  = {q_tau_coefficient}")
     print(f"|B0|^2 coefficient in integral q^2 / pi = {q_b0_coefficient}")
+    print("quartic relation K = tau^2/2 - tr(B^2)  = verified")
     print(f"determinant ratio                        = {determinant_ratio}")
     print(f"candidate volume coefficient             = {volume_coefficient}")
     print(f"candidate decimal                        = {sp.N(volume_coefficient, 18)}")

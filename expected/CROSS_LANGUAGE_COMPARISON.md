@@ -13,10 +13,13 @@ though both runs are deterministic within their own language.
 | Maximum relative error in `integral (4 det A_Y)^2` | `3.427e-15` | `5.107e-15` | Numerical quadrature agrees with the proposed quartic invariant identity. |
 | Candidate volume coefficient | `0.383602704709067716` | `0.383602704709068` | Agreement to all 15 digits printed by R. |
 
-All programmed acceptance thresholds passed in both languages.
+All programmed numerical-stress acceptance thresholds passed in both languages.
+The new finite pairing-count table has passed the Python exact enumerator; the
+matching base-R enumerator is present but still awaits Bruce Swihart's local run.
 
 This is strong cross-language numerical evidence for the tensor conventions and
-constants. It is not a proof of the full lower bound. In particular, the exact
-symbolic proof is currently implemented only in Python/SymPy, and the
-harmonic-projection, nuclear-norm, and nonsmooth-approximation arguments still
-require a publication-ready mathematical write-up and outside review.
+constants. It is not a proof of the full lower bound. In particular, the general
+symbolic integration is currently implemented only in Python/SymPy, and the
+full argument still requires a publication-ready LaTeX write-up and
+outside review.  The bridge and degree-3 tensor derivations now exist as detailed
+Markdown proof drafts.
