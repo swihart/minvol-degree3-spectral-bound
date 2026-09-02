@@ -8,12 +8,14 @@ three-dimensional Blaschke-Lebesgue problem.
 
 The proposed bound is
 
-\[
-\operatorname{Vol}(K) \ge
+$$
+{Vol}(K) \ge
 \frac{\pi}{1914}
 \left(259-27\sqrt{\frac{15183}{17303}}\right)d^3
-\approx 0.3836027047\,d^3.
-\]
+\approx 0.3836027047d^3.
+$$
+
+
 
 Nishioka's published coefficient is `4*pi/33 ~= 0.3807991095`.
 The candidate is numerically weaker than the much newer HYRA claims; its
