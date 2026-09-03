@@ -725,8 +725,9 @@ The exact scripts and this derivation use the same conventions:
 ## 11. Remaining review status
 
 This file closes the principal internal write-up gap identified as `T1-T4` in
-`proof/PROOF_LEDGER.md`.  It has been checked against two exact symbolic
-implementations and independent Python/R numerical tests, but it has not yet
-received outside expert review.  It should therefore be described as a
-**formal derivation in an AI-assisted research draft**, not as a peer-reviewed or
-independently certified theorem.
+`proof/PROOF_LEDGER.md`. It has been checked against two exact symbolic
+implementations and independent Python/R numerical tests, incorporated into
+`paper/degree3_spectral_refinement.tex`, and reviewed in
+`proof/PROOF_AUDIT.md`. It has not received outside expert review. It should
+therefore be described as a **formal derivation in an AI-assisted research
+draft**, not as a peer-reviewed or independently certified theorem.

@@ -1,0 +1,27 @@
+# Paper source
+
+The manuscript source is `degree3_spectral_refinement.tex`. To keep the build
+self-contained on minimal TeX installations, the short bibliography is included
+inside the TeX source.
+
+Build from the repository root with:
+
+```sh
+./build_paper.sh
+```
+
+or directly inside this directory with:
+
+```sh
+latexmk -pdf -interaction=nonstopmode -halt-on-error degree3_spectral_refinement.tex
+```
+
+The tracked PDF is `degree3_spectral_refinement.pdf`.
+
+## Status language
+
+Use:
+
+> AI-assisted, non-peer-reviewed research draft seeking independent mathematical verification.
+
+Do not describe the draft as peer reviewed, certified, or independently verified.

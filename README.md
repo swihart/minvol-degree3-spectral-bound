@@ -1,8 +1,9 @@
-# Degree-3 spectral refinement: verification checkpoint
+# Degree-3 spectral refinement: research-draft verification package
 
-This is an **internal verification project**, not yet a public theorem package.
-It tests a candidate refinement of Nishioka's lower bound for the
-three-dimensional Blaschke-Lebesgue problem.
+This is a **private, pre-release verification project** for a candidate
+refinement of Nishioka's lower bound for the three-dimensional
+Blaschke--Lebesgue problem. The repository now contains an integrated LaTeX
+research draft, but it is not yet ready for public release.
 
 ## Candidate coefficient
 
@@ -39,20 +40,39 @@ possible contribution is the independent degree-3 spectral mechanism.
   all six quartic moments.
 - The contraction-graph table is independently enumerated by exact Python code;
   a matching base-R script is included for cross-language checking.
+- An internal line-by-line audit is recorded in `proof/PROOF_AUDIT.md`.
+- The complete proof has been merged into an eight-page LaTeX manuscript in
+  `paper/degree3_spectral_refinement.tex`; the tracked PDF was built and
+  visually inspected in this project environment.
 
 ## What remains before public release
 
-- Run and preserve the new base-R pairing-count output and R session metadata.
-- Audit both proof drafts line by line and incorporate them into the paper
-  source.
-- Add automated continuous integration.
-- Add the paper source, bibliography, AI-assistance statement, and verification
-  status statement.
+- Run and preserve the base-R pairing-count and numerical outputs plus R session
+  metadata after applying the current patch.
+- Have the named author read and approve the complete manuscript, especially
+  the authorship, responsibility, and AI-assistance language.
+- Add automated continuous integration for Python, R, and the LaTeX build.
+- Add public-facing repository metadata: `LICENSE`, `CITATION.cff`, and
+  `VERIFICATION_STATUS.md`.
+- Perform a fresh-clone reproducibility test.
 - Obtain outside mathematical review after the first public research-draft
   release.
 
 See `proof/PROOF_LEDGER.md`, `proof/CLAIM_DEPENDENCIES.md`,
-`proof/BRIDGE_LEMMAS.md`, and `proof/DEGREE3_TENSOR_IDENTITY.md`.
+`proof/PROOF_AUDIT.md`, `proof/BRIDGE_LEMMAS.md`, and
+`proof/DEGREE3_TENSOR_IDENTITY.md`.
+
+## Build the paper
+
+The manuscript source and tracked PDF are in `paper/`. Build from the repository
+root with:
+
+```sh
+./build_paper.sh
+```
+
+The build requires `latexmk` and a standard LaTeX installation. See
+`paper/README.md`.
 
 ## Run the exact Python checks
 
@@ -91,7 +111,7 @@ integration is performed by the Python/SymPy scripts.
 
 Use:
 
-> AI-assisted research draft under internal reproducibility review.
+> AI-assisted, non-peer-reviewed research draft seeking independent mathematical verification.
 
 Do not use:
 

@@ -554,7 +554,7 @@ N\le4\pi\frac{d^2}{2}=2\pi d^2.
 
 \(\square\)
 
-### Theorem 6.2 (smooth candidate bound, conditional only on (1.4))
+### Theorem 6.2 (smooth bound from the determinant estimate)
 
 Every smooth convex body `K` of constant width `d` satisfies
 
@@ -597,7 +597,7 @@ Insert (6.3) in the volume identity (1.2):
 
 Substitute the definition (1.5) of `s` to obtain (6.2).  \(\square\)
 
-### Corollary 6.3 (strict improvement over Nishioka, conditional on (1.4))
+### Corollary 6.3 (strict improvement over Nishioka)
 
 The coefficient in (6.2) is strictly larger than `4*pi/33`.
 
@@ -616,7 +616,8 @@ Multiplying by `pi` proves the claim.  \(\square\)
 
 ### Theorem 7.1
 
-Assume the degree-3 determinant estimate (1.4).  Then (6.2) holds for every
+Together with the degree-3 determinant estimate proved in
+`proof/DEGREE3_TENSOR_IDENTITY.md`, equation (6.2) holds for every
 three-dimensional convex body of constant width `d`, without a smoothness
 assumption.
 
@@ -647,26 +648,15 @@ Pass to the limit as `j -> infinity`.  The right-hand side is independent of
 
 ## 8. What this file establishes
 
-Subject only to the degree-3 determinant estimate (1.4), the complete bridge
-from Nishioka's support-function framework to the proposed volume coefficient is
-now explicit.  The only new mathematical dependency not proved in this file is
-(1.4), together with the stronger exact identity from which it follows.
+This file gives the complete bridge from Nishioka's support-function framework
+to the proposed volume coefficient. Its only non-sourced mathematical input is
+the degree-3 determinant estimate (1.4), which is proved in
+`proof/DEGREE3_TENSOR_IDENTITY.md` using the same tensor and determinant
+conventions tested by the Python and R programs.
 
-The next proof file should therefore establish the degree-3 tensor identity:
-
-\[
-\|A_Y\|_2^2=\frac{176\pi}{7}\tau,
-\]
-
-\[
-\|4\det A_Y\|_2^2
-=
-\frac{\pi}{1001}
-\left(555264\tau^2-2265600\|B_0\|_F^2\right).
-\]
-
-That derivation must use exactly the tensor and determinant conventions tested
-by the Python and R programs.
+The two proof files have now been merged into the publication-style manuscript
+`paper/degree3_spectral_refinement.tex`. The internal line-by-line audit is
+recorded in `proof/PROOF_AUDIT.md`. External expert review remains open.
 
 ## Source used for the inherited framework
 

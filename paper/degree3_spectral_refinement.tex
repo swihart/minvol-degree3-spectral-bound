@@ -1,0 +1,691 @@
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\geometry{margin=1in}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdftitle={A Degree-Three Spectral Refinement of Nishioka's Lower Bound},
+  pdfauthor={Bruce Swihart},
+  pdfsubject={Three-dimensional Blaschke--Lebesgue problem},
+  pdfkeywords={constant width, Blaschke--Lebesgue problem, spherical harmonics, convex geometry}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Sph}{\mathbb S^2}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Harm}{\mathcal H}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Vol}{\operatorname{Vol}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\nuc}{*}
+\newcommand{\dd}{\,d\sigma}
+\newcommand{\ip}[2]{\left\langle #1,#2\right\rangle}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1\right\rvert}
+
+\title[A degree-three spectral refinement]{A Degree-Three Spectral Refinement of Nishioka's Lower Bound for the Three-Dimensional Blaschke--Lebesgue Problem}
+\author{Bruce Swihart}
+\date{September 2, 2026}
+\subjclass[2020]{52A20, 52A40, 33C55}
+\keywords{Bodies of constant width, Blaschke--Lebesgue problem, spherical harmonics, convex geometry}
+
+\begin{document}
+
+\begin{abstract}
+Let $K\subset\R^3$ be a convex body of constant width $d$. Nishioka proved
+$\Vol(K)\ge (4\pi/33)d^3$ by combining a support-function formulation with a
+spherical-harmonic estimate. We retain the degree-three harmonic component of
+the centered support function as an additional variable and derive a sharp
+quartic determinant inequality for its curvature tensor. This gives the
+candidate refinement
+\[
+ \Vol(K)\ge
+ \frac{\pi}{1914}\left(259-27\sqrt{\frac{15183}{17303}}\right)d^3
+ =0.3836027047090677\ldots\,d^3.
+\]
+The central tensor identity is derived invariantly and is also checked by two
+exact symbolic implementations, exhaustive pairing enumeration, and
+independent Python and R numerical tests. This is an AI-assisted research draft
+seeking independent mathematical verification. A recent public HYRA manuscript
+claims substantially stronger bounds by a different geometric and
+computer-assisted method; the contribution proposed here is an independent
+spectral mechanism rather than the numerically strongest current claim.
+\end{abstract}
+
+\maketitle
+
+\begin{center}
+\fbox{\begin{minipage}{0.92\textwidth}
+\small\textbf{Verification status.}
+This manuscript and its accompanying code form a non-peer-reviewed research
+draft. Exact computer algebra supports the displayed tensor identities, but no
+independent subject-matter expert has yet reviewed the complete proof. The
+repository should therefore be cited as a draft seeking verification, not as a
+certified or peer-reviewed theorem.
+\end{minipage}}
+\end{center}
+
+\section{Introduction}
+
+The three-dimensional Blaschke--Lebesgue problem asks for the least possible
+volume of a convex body of prescribed constant width. The conjectured minimizers
+are the two Meissner tetrahedra, whose common volume is approximately
+$0.419860046d^3$; the problem remains open \cite{KawohlWeber2011,Nishioka2027}.
+
+Improving Chakerian's classical estimate \cite{Chakerian1966}, Nishioka recently established
+\[
+ \Vol(K)\ge \frac{4\pi}{33}d^3
+ =0.380799109526\ldots\,d^3
+\]
+using the centered support function, spherical harmonics, and Bochner's formula
+\cite{Nishioka2027}. His discussion identifies a source of slack: equality in
+the degree-three spectral estimate is incompatible with equality in the
+pointwise curvature-matrix bound. He suggests going beyond the rotation-averaged
+relaxation by introducing additional variables or symmetry-breaking information.
+
+The present note retains the degree-three component $h_3$ of the centered
+support function and estimates the curvature tensor $A_{h_3}$ more sharply than
+one can estimate an arbitrary tangent-matrix field. The key new input is the
+sharp inequality
+\begin{equation}\label{eq:key-det-intro}
+ \norm{4\det A_Y}_{L^2(\Sph)}^2
+ \le \frac{15183}{17303\pi}\norm{A_Y}_{L^2(\Sph)}^4,
+ \qquad Y\in\Harm_3.
+\end{equation}
+It quantifies a restriction intrinsic to cubic spherical harmonics and leads to
+a reduced degree-three curvature budget.
+
+Harrell's variational formulation in terms of the sum of principal radii of
+curvature supplies useful historical and conceptual context: in dimension three
+that formulation is a relaxation because not every admissible scalar curvature
+field comes from an embedded constant-width body \cite{Harrell2002,Nishioka2027}.
+The argument here instead remains within Nishioka's exact support-function
+constraints.
+
+A public HYRA manuscript dated August 2026 claims the stronger analytic bound
+$0.4041207788d^3$ and a computer-assisted bound above $0.4110404737d^3$
+\cite{HYRA2026}. Those claims have not been checked in this project. If correct,
+they supersede the numerical coefficient obtained here. The purpose of this
+note is therefore to document a complementary spectral route in a transparent,
+reproducible form.
+
+\section{Support functions and the refined spectral split}
+
+We follow Nishioka's normalization \cite{Nishioka2027}. Let $p$ be the support
+function of a smooth body of constant width $d$ and put
+\[
+ h=p-\frac d2.
+\]
+Then $h(-u)=-h(u)$. After a translation we may also impose
+$h\perp\Harm_1$. Define the self-adjoint tangent endomorphism
+\[
+ A_h:=\nabla^2h+h\Id.
+\]
+The principal radii of curvature of $p$ are the eigenvalues of
+$A_h+(d/2)\Id$, and constant width gives the pointwise bounds
+\begin{equation}\label{eq:box}
+ -\frac d2\Id\preceq A_h(u)\preceq \frac d2\Id,
+ \qquad u\in\Sph.
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:volume}
+ \Vol(K)=\frac{\pi d^3}{6}-\frac d2 E(h),
+ \qquad
+ E(h):=\int_{\Sph}\left(\frac12\abs{\nabla h}^2-h^2\right)\dd.
+\end{equation}
+
+For tangent endomorphism fields $A,B$, write
+\[
+ \langle A,B\rangle_2:=\int_{\Sph}\tr(AB)\dd,
+ \qquad \norm{A}_2^2:=\langle A,A\rangle_2.
+\]
+If $Y_\ell\in\Harm_\ell$ and
+$\lambda_\ell=\ell(\ell+1)$, Nishioka's calculation gives
+\begin{equation}\label{eq:nishioka-mode}
+ E(Y_\ell)=\frac{\lambda_\ell-2}{2}\norm{Y_\ell}_{L^2}^2,
+ \qquad
+ \norm{A_{Y_\ell}}_2^2
+ = (\lambda_\ell-1)(\lambda_\ell-2)\norm{Y_\ell}_{L^2}^2.
+\end{equation}
+
+We first record explicitly the tensor-valued orthogonality needed below.
+
+\begin{lemma}[Polarized Bochner identity]\label{lem:polarized-bochner}
+For smooth real-valued $f,g$ on $\Sph$,
+\[
+ \int_{\Sph}\ip{\nabla^2f}{\nabla^2g}\dd
+ =\int_{\Sph}(\Delta f)(\Delta g)\dd
+ -\int_{\Sph}\ip{\nabla f}{\nabla g}\dd.
+\]
+\end{lemma}
+
+\begin{proof}
+Polarize the integrated Bochner identity on the unit sphere,
+\[
+ \int_{\Sph}\abs{\nabla^2q}^2\dd
+ =\int_{\Sph}(\Delta q)^2\dd
+ -\int_{\Sph}\abs{\nabla q}^2\dd,
+\]
+by applying it to $q=f+g$ and $q=f-g$.
+\end{proof}
+
+\begin{lemma}[Curvature-tensor orthogonality]\label{lem:tensor-orth}
+If $f\in\Harm_\ell$ and $g\in\Harm_m$ with $\ell\ne m$, then
+$\langle A_f,A_g\rangle_2=0$. If $f,g\in\Harm_\ell$, then
+\[
+ \langle A_f,A_g\rangle_2
+ = (\lambda_\ell-1)(\lambda_\ell-2)
+   \int_{\Sph}fg\dd.
+\]
+\end{lemma}
+
+\begin{proof}
+Expanding and then using Lemma~\ref{lem:polarized-bochner},
+\begin{align*}
+ \langle A_f,A_g\rangle_2
+ ={}&\int_{\Sph}(\Delta f)(\Delta g)\dd
+ -\int_{\Sph}\ip{\nabla f}{\nabla g}\dd\\
+ &+\int_{\Sph}g\Delta f\dd
+ +\int_{\Sph}f\Delta g\dd
+ +2\int_{\Sph}fg\dd.
+\end{align*}
+Distinct harmonic degrees are $L^2$-orthogonal, and every term above is a
+scalar multiple of $\int fg$. For equal degrees, substitute
+$\Delta f=-\lambda_\ell f$ and $\Delta g=-\lambda_\ell g$ to obtain the stated
+factor.
+\end{proof}
+
+Write the odd harmonic expansion as
+\[
+ h=h_3+h_{\ge5},
+ \qquad
+ h_{\ge5}=\sum_{\substack{\ell\ge5\\ \ell\ \mathrm{odd}}}h_\ell,
+\]
+and put
+\[
+ C:=A_{h_3},\qquad N:=\norm{A_h}_2^2,\qquad N_3:=\norm{C}_2^2.
+\]
+Since $h$ is smooth, its harmonic expansion converges in $H^2(\Sph)$; hence
+Lemma~\ref{lem:tensor-orth} gives
+\begin{equation}\label{eq:projection}
+ N=\sum_{\substack{\ell\ge3\\ \ell\ \mathrm{odd}}}
+   \norm{A_{h_\ell}}_2^2,
+ \qquad
+ N_3=\langle A_h,C\rangle_2.
+\end{equation}
+
+\begin{proposition}[Refined spectral split]\label{prop:spectral-split}
+For every smooth admissible $h$,
+\begin{equation}\label{eq:spectral-split}
+ E(h)\le \frac1{58}N+\frac9{319}N_3.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Equation~\eqref{eq:nishioka-mode} yields
+\[
+ E(h_\ell)=\frac{1}{2(\lambda_\ell-1)}
+ \norm{A_{h_\ell}}_2^2.
+\]
+The coefficient equals $1/22$ at $\ell=3$ and is at most $1/58$ for every odd
+$\ell\ge5$. Orthogonality therefore gives
+\[
+ E(h)\le \frac1{22}N_3+\frac1{58}(N-N_3)
+ =\frac1{58}N+\frac9{319}N_3.
+\]
+\end{proof}
+
+\section{The degree-three determinant inequality}
+
+Every $Y\in\Harm_3$ is the restriction to $\Sph$ of a homogeneous harmonic
+cubic
+\[
+ F(x)=T_{ijk}x_ix_jx_k,
+\]
+where $T$ is a real symmetric trace-free rank-three tensor:
+$T_{ijk}=T_{(ijk)}$ and $T_{iik}=0$. Fix $u\in\Sph$ and define
+\[
+ P=I-u\otimes u,
+ \qquad
+ M(u)_{jk}=T_{ijk}u_i,
+ \qquad
+ v(u)=M(u)u,
+ \qquad
+ Y(u)=u^TM(u)u.
+\]
+Also put
+\begin{equation}\label{eq:invariants}
+ \tau=T_{ijk}T_{ijk},
+ \qquad
+ B_{ij}=T_{ikl}T_{jkl},
+ \qquad
+ B_0=B-\frac{\tau}{3}I.
+\end{equation}
+
+\begin{lemma}[Spherical curvature tensor]\label{lem:curvature-formula}
+For $C=A_Y=\nabla^2_{\Sph}Y+Y\Id$, regarded as a $3\times3$ symmetric matrix
+that vanishes on the normal direction $u$,
+\begin{equation}\label{eq:C-formula}
+ C=6PMP-2YP.
+\end{equation}
+Moreover,
+\begin{align}
+ \tr C&=-10Y,\label{eq:trace-C}\\
+ \abs{C}^2&=36\abs{M}^2-72\abs{v}^2+68Y^2,\label{eq:norm-C-point}\\
+ 4\det C&=64Y^2+144\abs{v}^2-72\abs{M}^2.\label{eq:q-compact}
+\end{align}
+The determinant is taken on $T_u\Sph$.
+\end{lemma}
+
+\begin{proof}
+For tangent vectors $\xi,\eta\in T_u\Sph$, the restriction formula for the
+Hessian of a homogeneous cubic gives
+\[
+ \nabla^2_{\Sph}Y(\xi,\eta)
+ =D^2F(u)[\xi,\eta]-3Y(u)\ip{\xi}{\eta}.
+\]
+Since $D^2F(u)=6M(u)$, adding $Y\Id$ yields
+\eqref{eq:C-formula}. Trace-freeness gives $\tr M=0$ and
+$\tr(PMP)=-Y$, proving \eqref{eq:trace-C}.
+
+In an orthonormal basis whose first vector is $u$, write
+\[
+ M=\begin{pmatrix}Y&w^T\\ w&N\end{pmatrix},
+ \qquad
+ v=\begin{pmatrix}Y\\w\end{pmatrix}.
+\]
+Then $\abs{PMP}^2=\abs{M}^2-2\abs{v}^2+Y^2$. Expanding
+$\abs{6PMP-2YP}^2$ gives \eqref{eq:norm-C-point}. Finally, for the two tangent
+eigenvalues of $C$,
+\[
+ 4\det C=2\bigl((\tr C)^2-\tr(C^2)\bigr),
+\]
+and substitution of \eqref{eq:trace-C}--\eqref{eq:norm-C-point} yields
+\eqref{eq:q-compact}.
+\end{proof}
+
+We use the standard even moment formula
+\begin{equation}\label{eq:sphere-moment}
+ \int_{\Sph}u_{i_1}\cdots u_{i_{2m}}\dd
+ =\frac{4\pi}{(2m+1)!!}
+   \sum_{\mathcal P}\prod_{\{a,b\}\in\mathcal P}\delta_{i_ai_b},
+\end{equation}
+where the sum runs over all pairings of $\{1,\ldots,2m\}$. Odd moments vanish.
+The quadratic consequences needed below are
+\begin{equation}\label{eq:quadratic-moments}
+ \int_{\Sph}Y^2\dd=\frac{8\pi}{35}\tau,
+ \qquad
+ \int_{\Sph}\abs{v}^2\dd=\frac{8\pi}{15}\tau,
+ \qquad
+ \int_{\Sph}\abs{M}^2\dd=\frac{4\pi}{3}\tau.
+\end{equation}
+Combining \eqref{eq:norm-C-point} with \eqref{eq:quadratic-moments} gives
+\begin{equation}\label{eq:C-norm-invariant}
+ \norm{C}_2^2=\frac{176\pi}{7}\tau.
+\end{equation}
+
+For the quartic calculation, define
+\[
+ J:=\tr(B^2),
+ \qquad
+ \mathcal K:=T_{abc}T_{ade}T_{bdf}T_{cef}.
+\]
+The next relation is special to dimension three.
+
+\begin{lemma}[Quartic contraction relation]\label{lem:quartic-relation}
+\begin{equation}\label{eq:quartic-relation}
+ \mathcal K=\frac12\tau^2-J.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For each $i$, let $(A_i)_{jk}=T_{ijk}$. Each $A_i$ is a symmetric traceless
+$3\times3$ matrix. One has
+\[
+ \tau=\sum_i\tr(A_i^2),
+ \qquad
+ J=\sum_{i,j}\bigl(\tr(A_iA_j)\bigr)^2,
+ \qquad
+ \sum_iA_i^2=B.
+\]
+For every traceless $3\times3$ matrix $X$, Cayley--Hamilton implies
+$\tr(X^4)=\tfrac12(\tr(X^2))^2$. Apply this to $X=A+tD$ and compare the
+coefficient of $t^2$:
+\[
+ 4\tr(A^2D^2)+2\tr(ADAD)
+ =\tr(A^2)\tr(D^2)+2(\tr(AD))^2.
+\]
+Set $A=A_i$, $D=A_j$, and sum over $i,j$. The first term on the left sums to
+$4J$, while
+\[
+ \sum_{i,j}\tr(A_iA_jA_iA_j)
+ =T_{iab}T_{jbc}T_{icd}T_{jda}=\mathcal K
+\]
+after relabeling dummy indices and using full symmetry of $T$. The right side
+sums to $\tau^2+2J$. Thus $4J+2\mathcal K=\tau^2+2J$, which is
+\eqref{eq:quartic-relation}.
+\end{proof}
+
+The pairing expansion from \eqref{eq:sphere-moment}, together with
+Lemma~\ref{lem:quartic-relation}, yields the six moment identities in
+Table~\ref{tab:moments}. Appendix~\ref{app:pairings} gives the complete
+contraction count.
+
+\begin{table}[ht]
+\centering
+\caption{Quartic moments after reducing $\mathcal K$ by
+\eqref{eq:quartic-relation}.}
+\label{tab:moments}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Integrand & Integral divided by $\pi$ \\
+\midrule
+$Y^4$ & $\dfrac{16}{715}\tau^2+\dfrac{96}{5005}J$ \\[1.2ex]
+$Y^2\abs{v}^2$ & $\dfrac{16}{495}\tau^2+\dfrac{32}{1155}J$ \\[1.2ex]
+$Y^2\abs{M}^2$ & $\dfrac{8}{315}\tau^2+\dfrac{16}{105}J$ \\[1.2ex]
+$\abs{v}^4$ & $\dfrac{16}{315}\tau^2+\dfrac{32}{315}J$ \\[1.2ex]
+$\abs{v}^2\abs{M}^2$ & $\dfrac{8}{105}\tau^2+\dfrac{32}{105}J$ \\[1.2ex]
+$\abs{M}^4$ & $\dfrac{4}{15}\tau^2+\dfrac{8}{15}J$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}[Exact cubic determinant identity]\label{prop:det-identity}
+For every $Y\in\Harm_3$ and $C=A_Y$,
+\begin{equation}\label{eq:det-identity}
+ \norm{4\det C}_{L^2(\Sph)}^2
+ =\frac{\pi}{1001}
+  \left(555264\tau^2-2265600\abs{B_0}^2\right).
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:det-bound}
+ \norm{4\det C}_{L^2(\Sph)}^2
+ \le \frac{15183}{17303\pi}\norm{C}_2^4.
+\end{equation}
+Equality in \eqref{eq:det-bound} holds exactly when $B_0=0$; this occurs, for
+example, for $Y(x,y,z)=xyz$ up to scaling and rotation.
+\end{proposition}
+
+\begin{proof}
+Put $a=Y^2$, $b=\abs{v}^2$, and $c=\abs{M}^2$. By
+\eqref{eq:q-compact},
+\[
+ (4\det C)^2
+ =4096a^2+18432ab-9216ac+20736b^2-20736bc+5184c^2.
+\]
+Substitution of Table~\ref{tab:moments} gives
+\[
+ \int_{\Sph}(4\det C)^2\dd
+ =\frac{\pi}{1001}\left(1310464\tau^2-2265600J\right).
+\]
+Since $\tr B=\tau$ and $B_0=B-(\tau/3)I$,
+$J=\abs{B_0}^2+\tau^2/3$, which proves \eqref{eq:det-identity}.
+Dropping the nonpositive $B_0$ term and eliminating $\tau$ using
+\eqref{eq:C-norm-invariant} yields
+\[
+ \frac{555264\pi/1001}{(176\pi/7)^2}
+ =\frac{15183}{17303\pi},
+\]
+proving \eqref{eq:det-bound}. Equality is equivalent to $B_0=0$. For
+$Y=xyz$, the six components $T_{123}$ and their permutations are $1/6$,
+which gives $\tau=1/6$ and $B=(1/18)I=(\tau/3)I$.
+\end{proof}
+
+\section{The degree-three curvature budget}
+
+Set
+\[
+ s:=\sqrt{\frac{15183}{17303}}.
+\]
+For a self-adjoint endomorphism $M$ of a two-dimensional Euclidean space,
+write $\norm{M}_{\op}$ for the operator norm and $\norm{M}_{\nuc}$ for the
+nuclear norm.
+
+\begin{lemma}[Integrated nuclear-norm bound]\label{lem:nuclear}
+For $C=A_Y$ with $Y\in\Harm_3$,
+\begin{align}
+ \int_{\Sph}\norm{C}_{\nuc}^2\dd&\le(1+s)\norm{C}_2^2,
+ \label{eq:nuclear2}\\
+ \left(\int_{\Sph}\norm{C}_{\nuc}\dd\right)^2
+ &\le4\pi(1+s)\norm{C}_2^2.
+ \label{eq:nuclear1}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+If $\mu_1,\mu_2$ are the tangent eigenvalues of $C$, then
+\[
+ \norm{C}_{\nuc}^2
+ = (\abs{\mu_1}+\abs{\mu_2})^2
+ =\abs{C}^2+2\abs{\det C}.
+\]
+Writing $q=4\det C$ and integrating,
+\[
+ \int_{\Sph}\norm{C}_{\nuc}^2\dd
+ =\norm{C}_2^2+\frac12\norm{q}_{L^1}.
+\]
+Cauchy--Schwarz and \eqref{eq:det-bound} give
+\[
+ \norm{q}_{L^1}
+ \le 2\sqrt\pi\norm{q}_{L^2}
+ \le2s\norm{C}_2^2,
+\]
+which proves \eqref{eq:nuclear2}. A second Cauchy--Schwarz inequality on the
+sphere of area $4\pi$ gives \eqref{eq:nuclear1}.
+\end{proof}
+
+\begin{proposition}[Cubic curvature budget]\label{prop:cubic-budget}
+For the degree-three component $C=A_{h_3}$ of any smooth admissible support
+function,
+\begin{equation}\label{eq:cubic-budget}
+ N_3=\norm{C}_2^2\le\pi d^2(1+s).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For self-adjoint tangent endomorphisms $A,M$,
+\[
+ \abs{\tr(AM)}\le\norm{A}_{\op}\norm{M}_{\nuc}.
+\]
+By \eqref{eq:box}, $\norm{A_h(u)}_{\op}\le d/2$. The projection identity
+\eqref{eq:projection} therefore gives
+\[
+ N_3=\int_{\Sph}\tr(A_hC)\dd
+ \le\frac d2\int_{\Sph}\norm{C}_{\nuc}\dd.
+\]
+If $N_3=0$ there is nothing to prove. Otherwise square, apply
+\eqref{eq:nuclear1}, and divide by $N_3$:
+\[
+ N_3\le4\pi\left(\frac d2\right)^2(1+s)
+ =\pi d^2(1+s).
+\]
+\end{proof}
+
+\section{The volume bound}
+
+\begin{theorem}\label{thm:main}
+Every convex body $K\subset\R^3$ of constant width $d$ satisfies
+\begin{equation}\label{eq:main-bound}
+ \Vol(K)\ge
+ \frac{\pi}{1914}\left(259-27\sqrt{\frac{15183}{17303}}\right)d^3
+ =0.3836027047090677\ldots\,d^3.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+First suppose the support function is smooth. By \eqref{eq:box}, the two
+eigenvalues of $A_h(u)$ lie in $[-d/2,d/2]$, so
+\begin{equation}\label{eq:global-budget}
+ N=\norm{A_h}_2^2\le 2\pi d^2.
+\end{equation}
+Combining Proposition~\ref{prop:spectral-split},
+Proposition~\ref{prop:cubic-budget}, and \eqref{eq:global-budget},
+\begin{align*}
+ E(h)
+ &\le \frac1{58}N+\frac9{319}N_3\\
+ &\le \frac{2\pi d^2}{58}
+  +\frac9{319}\pi d^2(1+s)\\
+ &=\frac{\pi d^2}{319}(20+9s).
+\end{align*}
+Insert this in \eqref{eq:volume}:
+\[
+ \Vol(K)
+ \ge\pi d^3\left(\frac16-\frac{20+9s}{638}\right)
+ =\frac{\pi d^3}{1914}(259-27s).
+\]
+This proves \eqref{eq:main-bound} in the smooth class.
+
+For an arbitrary constant-width body, use the smooth constant-width
+approximation and Hausdorff continuity of volume recorded by Nishioka
+\cite[Lemma 2]{Nishioka2027}, ultimately based on
+\cite[Theorem 8.5.1]{MartiniMontejanoOliveros2019}. Apply the smooth estimate to
+the approximating bodies and pass to the limit.
+\end{proof}
+
+\begin{corollary}\label{cor:improvement}
+The coefficient in \eqref{eq:main-bound} is strictly larger than $4\pi/33$.
+More precisely, with $s=\sqrt{15183/17303}$,
+\[
+ \frac{\pi}{1914}(259-27s)-\frac{4\pi}{33}
+ =\frac{9\pi}{638}(1-s)
+ =0.00280359518303217\ldots>0.
+\]
+\end{corollary}
+
+\section{Reproducibility and disclosure}
+
+The accompanying repository separates the mathematical derivation from the
+computational checks. The exact Python/SymPy scripts:
+\begin{itemize}[leftmargin=2em]
+ \item construct a general seven-parameter symmetric trace-free cubic tensor;
+ \item derive \eqref{eq:C-norm-invariant} and \eqref{eq:det-identity} by exact
+       polynomial integration on $\Sph$;
+ \item check \eqref{eq:q-compact} independently modulo
+       $x^2+y^2+z^2-1$;
+ \item enumerate all pairings behind Appendix~\ref{app:pairings}; and
+ \item reproduce the exact and decimal constants in Theorem~\ref{thm:main}.
+\end{itemize}
+Independent base-R scripts repeat the pairing count and numerical tensor stress
+tests. These computations are evidence against transcription and normalization
+errors; they do not substitute for independent mathematical review.
+
+\subsection*{Declaration of AI assistance}
+AI assistance was used extensively to explore proof strategies, carry out and
+cross-check symbolic calculations, draft exposition, and prepare reproducibility
+code. The named author is responsible for the decision to release this draft,
+for accurately describing its provenance and verification status, and for
+maintaining corrections. No AI system is listed as an author. Independent
+expert verification of the complete proof has not yet occurred.
+
+\appendix
+\section{Contraction counts for the quartic moments}\label{app:pairings}
+
+Represent the four copies of $T$ by four labeled vertices, each with three
+index slots. A contraction within a single tensor is a loop and vanishes because
+$T$ is trace-free. Every surviving complete contraction is one of three graph
+types:
+\begin{enumerate}[leftmargin=2em]
+ \item $D$: two disjoint vertex pairs joined by three parallel edges, giving
+       $\tau^2$;
+ \item $J$: two opposite doubled edges and two connecting single edges, giving
+       $J=\tr(B^2)$;
+ \item $\mathcal K$: the simple complete graph on four vertices, giving the
+       tetrahedral contraction $\mathcal K$.
+\end{enumerate}
+The relation $\mathcal K=\tau^2/2-J$ then reduces every quartic moment to
+$\tau^2$ and $J$.
+
+Some scalar contractions are already fixed before applying the sphere-moment
+formula. Table~\ref{tab:pairings} records the remaining pairing counts. The last
+two columns result after eliminating $\mathcal K$.
+
+\begin{table}[ht]
+\centering
+\caption{Exact pairing counts.}
+\label{tab:pairings}
+\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Integrand & $n_D$ & $n_J$ & $n_{\mathcal K}$ & $n_{\tau^2}$ & $n_J'$ \\
+\midrule
+$Y^4$ & 108 & 1944 & 1296 & 756 & 648 \\
+$Y^2\abs v^2$ & 12 & 216 & 144 & 84 & 72 \\
+$Y^2\abs M^2$ & 6 & 36 & 0 & 6 & 36 \\
+$\abs v^4$ & 4 & 40 & 16 & 12 & 24 \\
+$\abs v^2\abs M^2$ & 2 & 8 & 0 & 2 & 8 \\
+$\abs M^4$ & 1 & 2 & 0 & 1 & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For example, in $Y^4$ the disconnected type contributes
+$3(3!)^2=108$ pairings, the tetrahedral type contributes $(3!)^4=1296$, and
+the six labeled $J$ graphs contribute
+$6\cdot 3^4(2!)^2=1944$. The other rows follow by the same slot-counting
+argument with the scalar contractions in $\abs v^2$ and $\abs M^2$ fixed.
+The repository script \texttt{python/verify\_pairing\_counts.py} exhaustively
+enumerates the pairings and reproduces the table exactly; the base-R script
+\texttt{R/verify\_pairing\_counts.R} is an independent implementation.
+
+Multiplication by $4\pi/(2m+1)!!$, where $2m$ is the number of remaining
+sphere-coordinate factors, gives Table~\ref{tab:moments}.
+
+\begin{thebibliography}{99}
+
+\bibitem{Chakerian1966}
+G.~D. Chakerian,
+\emph{Sets of constant width},
+Pacific J. Math. \textbf{19} (1966), no.~1, 13--21.
+
+\bibitem{Harrell2002}
+E.~M. Harrell II,
+\emph{A direct proof of a theorem of Blaschke and Lebesgue},
+J. Geom. Anal. \textbf{12} (2002), no.~1, 81--88.
+
+\bibitem{HYRA2026}
+HYRA,
+\emph{A certified geometric lower bound for the three-dimensional
+Blaschke--Lebesgue problem},
+public research manuscript in the Tencent Hunyuan Hyra-results repository,
+dated August 15, 2026,
+\url{https://github.com/Tencent-Hunyuan/Hyra-results/tree/main/AI4Science/3d_blaschke_lebesgue}.
+
+\bibitem{KawohlWeber2011}
+B.~Kawohl and C.~Weber,
+\emph{Meissner's mysterious bodies},
+Math. Intelligencer \textbf{33} (2011), no.~3, 94--101.
+
+\bibitem{MartiniMontejanoOliveros2019}
+H.~Martini, L.~Montejano, and D.~Oliveros,
+\emph{Bodies of Constant Width: An Introduction to Convex Geometry with
+Applications},
+Birkh\"auser, 2019.
+
+\bibitem{Nishioka2027}
+A.~Nishioka,
+\emph{An improved lower bound for the three-dimensional Blaschke--Lebesgue
+problem from spectral and dual perspectives},
+J. Math. Anal. Appl. \textbf{566} (2027), 131038,
+\url{https://doi.org/10.1016/j.jmaa.2026.131038}.
+
+\end{thebibliography}
+
+\end{document}
