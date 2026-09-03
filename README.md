@@ -62,6 +62,35 @@ See `proof/PROOF_LEDGER.md`, `proof/CLAIM_DEPENDENCIES.md`,
 `proof/PROOF_AUDIT.md`, `proof/BRIDGE_LEMMAS.md`, and
 `proof/DEGREE3_TENSOR_IDENTITY.md`.
 
+
+## Typeset PDF versions of the Markdown documentation
+
+GitHub does not consistently render the repository's single-backslash LaTeX
+math delimiters.  Typeset PDF counterparts are tracked under
+`rendered/markdown/`, with the source directory structure preserved.  The
+Markdown files remain the editable source of truth.
+
+- [Repository overview PDF](rendered/markdown/README.pdf)
+- [Cross-language comparison PDF](rendered/markdown/expected/CROSS_LANGUAGE_COMPARISON.pdf)
+- [Paper build notes PDF](rendered/markdown/paper/README.pdf)
+- [Bridge lemmas PDF](rendered/markdown/proof/BRIDGE_LEMMAS.pdf)
+- [Claim dependencies PDF](rendered/markdown/proof/CLAIM_DEPENDENCIES.pdf)
+- [Degree-3 tensor identity PDF](rendered/markdown/proof/DEGREE3_TENSOR_IDENTITY.pdf)
+- [Internal proof audit PDF](rendered/markdown/proof/PROOF_AUDIT.pdf)
+- [Proof ledger PDF](rendered/markdown/proof/PROOF_LEDGER.pdf)
+
+Regenerate every Markdown-derived PDF from the repository root with:
+
+```sh
+./build_markdown_pdfs.sh
+```
+
+The build requires Pandoc 3 or later, Python 3, and a XeLaTeX installation.
+The script recognizes the `\(...\)` and `\[...\]` delimiters used in the
+proof notes, converts the few multi-line tagged displays to valid `amsmath`
+environments, normalizes the PDF trailer identifiers for reproducible output,
+and writes a SHA-256 manifest to `rendered/markdown/SHA256SUMS.txt`.
+
 ## Build the paper
 
 The manuscript source and tracked PDF are in `paper/`. Build from the repository
