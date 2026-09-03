@@ -1,0 +1,140 @@
+name: Verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verification-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-verification:
+    name: Exact Python and numerical checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Run exact and numerical checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ci-artifacts
+          ./run_python_checks.sh | tee ci-artifacts/python_checks_output.txt
+
+      - name: Upload Python verification log
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: python-verification-log
+          path: ci-artifacts/python_checks_output.txt
+          if-no-files-found: ignore
+          retention-days: 14
+
+  r-verification:
+    name: Independent R checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.6.1"
+
+      - name: Run pairing-count and numerical checks
+        run: ./run_r_checks.sh
+
+      - name: Confirm R pass markers
+        run: |
+          grep -F "R PAIRING-COUNT CHECK: PASS" expected/R_pairing_counts_output.txt
+          grep -F "R NUMERICAL STRESS TESTS: PASS" expected/R_numerical_stress_output.txt
+
+      - name: Upload R verification logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: r-verification-logs
+          path: |
+            expected/R_pairing_counts_output.txt
+            expected/R_numerical_stress_output.txt
+            expected/R_session_info.txt
+          if-no-files-found: ignore
+          retention-days: 14
+
+  document-builds:
+    name: Build and preflight PDFs
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Set up Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+        with:
+          pandoc-version: "3.10.1"
+
+      - name: Install TeX and PDF tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends \
+            latexmk \
+            lmodern \
+            poppler-utils \
+            texlive-fonts-recommended \
+            texlive-latex-extra \
+            texlive-xetex
+          pandoc --version | head -n 2
+          xelatex --version | head -n 2
+
+      - name: Build research paper
+        run: ./build_paper.sh
+
+      - name: Build Markdown-derived PDFs
+        run: ./build_markdown_pdfs.sh
+
+      - name: Preflight generated PDFs
+        run: ./ci/preflight_pdfs.sh
+
+      - name: Upload generated PDFs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: typeset-pdfs
+          path: |
+            paper/degree3_spectral_refinement.pdf
+            rendered/markdown/**/*.pdf
+            rendered/markdown/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14

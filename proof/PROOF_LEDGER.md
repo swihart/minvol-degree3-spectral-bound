@@ -8,6 +8,7 @@ Status labels:
 - **Numerically cross-checked**: deterministic quadrature/random tests agree.
 - **Formal write-up drafted**: a line-by-line proof is in the repository, but has not received outside review.
 - **Integrated manuscript drafted**: the claim has been merged into the LaTeX research note and compiled.
+- **CI configured**: a hosted workflow has been added but its first repository run still needs confirmation.
 - **Needs local rerun**: a matching check exists but should be rerun and preserved in the current repository state.
 - **Needs external review**: no independent subject-matter expert has checked it.
 
@@ -29,18 +30,21 @@ Status labels:
 | R1 | Passage to nonsmooth bodies | Nishioka's approximation lemma; `BRIDGE_LEMMAS.md`, Theorem 7.1 | Sourced; formal write-up drafted; needs external review |
 | P1 | Complete paper source compiles without unresolved references | `paper/degree3_spectral_refinement.tex`; `build_paper.sh` | Integrated manuscript drafted; runtime-tested in project environment |
 | P2 | PDF has no visible clipping, overlap, or broken glyphs | Eight rendered pages inspected at 180 dpi | Render-checked |
+| C1 | Hosted clean-environment checks for Python, R, the paper, and Markdown PDFs | `.github/workflows/verification.yml` | CI configured; first GitHub-hosted run must still be confirmed |
+| D1 | Public-facing verification and reproduction instructions | `VERIFICATION_STATUS.md`; `REPRODUCIBILITY.md` | Drafted and integrated |
 | L1 | Exact constant/decimal not found in a targeted web search | Search terms and limitations recorded in `PROOF_AUDIT.md` | Preliminary only; not a systematic novelty review |
 | E1 | Full theorem has been independently reviewed | None yet | Needs external review |
 
 ## Current bottleneck
 
-The internal proof chain and first integrated manuscript are complete. The next
+The internal proof chain and first integrated manuscript are complete. Continuous
+integration and verification documentation are now configured. The next
 internal gates are:
 
-1. rerun and preserve the current R pairing-count and numerical outputs;
-2. have the named author read and approve the manuscript and disclosure language;
-3. add continuous integration and public-facing repository metadata;
-4. perform a fresh-clone test before public release.
+1. confirm that the first remote GitHub Actions run passes all three jobs;
+2. have the named author finish reading and approve the manuscript and disclosure language;
+3. choose the public license and finalize `CITATION.cff`;
+4. perform and record a fresh-clone test before public release.
 
 ## Release rule
 

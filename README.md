@@ -47,14 +47,12 @@ possible contribution is the independent degree-3 spectral mechanism.
 
 ## What remains before public release
 
-- Run and preserve the base-R pairing-count and numerical outputs plus R session
-  metadata after applying the current patch.
 - Have the named author read and approve the complete manuscript, especially
   the authorship, responsibility, and AI-assistance language.
-- Add automated continuous integration for Python, R, and the LaTeX build.
-- Add public-facing repository metadata: `LICENSE`, `CITATION.cff`, and
-  `VERIFICATION_STATUS.md`.
-- Perform a fresh-clone reproducibility test.
+- Confirm that the first hosted GitHub Actions run passes the Python, R, and
+  document-build jobs.
+- Choose the public license and add final citation metadata in `CITATION.cff`.
+- Perform and record a fresh-clone reproducibility test.
 - Obtain outside mathematical review after the first public research-draft
   release.
 
@@ -62,6 +60,24 @@ See `proof/PROOF_LEDGER.md`, `proof/CLAIM_DEPENDENCIES.md`,
 `proof/PROOF_AUDIT.md`, `proof/BRIDGE_LEMMAS.md`, and
 `proof/DEGREE3_TENSOR_IDENTITY.md`.
 
+## Automated verification and reproducibility
+
+The workflow in [`.github/workflows/verification.yml`](.github/workflows/verification.yml)
+runs on pushes to `main`, pull requests, and manual dispatch. It uses separate
+Ubuntu jobs to:
+
+- install the declared Python dependencies and run every exact and numerical
+  Python check;
+- install R and run the independent pairing-count and numerical checks; and
+- install Pandoc and TeX, rebuild the research paper and every Markdown-derived
+  PDF, and preflight the generated PDF files and checksum manifest.
+
+A green workflow run means that the posted code and document sources execute
+successfully in a fresh hosted environment. It does **not** constitute peer
+review or independent verification of the mathematical argument.
+
+- [Verification status](VERIFICATION_STATUS.md)
+- [Reproducibility guide](REPRODUCIBILITY.md)
 
 ## Typeset PDF versions of the Markdown documentation
 
@@ -71,6 +87,8 @@ math delimiters.  Typeset PDF counterparts are tracked under
 Markdown files remain the editable source of truth.
 
 - [Repository overview PDF](rendered/markdown/README.pdf)
+- [Reproducibility guide PDF](rendered/markdown/REPRODUCIBILITY.pdf)
+- [Verification status PDF](rendered/markdown/VERIFICATION_STATUS.pdf)
 - [Cross-language comparison PDF](rendered/markdown/expected/CROSS_LANGUAGE_COMPARISON.pdf)
 - [Paper build notes PDF](rendered/markdown/paper/README.pdf)
 - [Bridge lemmas PDF](rendered/markdown/proof/BRIDGE_LEMMAS.pdf)

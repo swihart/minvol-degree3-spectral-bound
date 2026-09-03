@@ -25,3 +25,7 @@ Use:
 > AI-assisted, non-peer-reviewed research draft seeking independent mathematical verification.
 
 Do not describe the draft as peer reviewed, certified, or independently verified.
+
+The repository-wide status and reproduction instructions are maintained in
+[`../VERIFICATION_STATUS.md`](../VERIFICATION_STATUS.md) and
+[`../REPRODUCIBILITY.md`](../REPRODUCIBILITY.md).
