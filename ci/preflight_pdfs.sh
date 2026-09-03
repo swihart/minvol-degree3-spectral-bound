@@ -63,12 +63,14 @@ markdown_sources=$(mktemp)
 trap 'rm -f "$paper_text" "$markdown_sources"' EXIT HUP INT TERM
 
 pdftotext "$paper_pdf" "$paper_text"
-grep -Fi "Bruce Swihart" "$paper_text" >/dev/null || \
-  fail "paper PDF does not contain the author name"
+grep -Fi "Bruce J. Swihart" "$paper_text" >/dev/null || \
+  fail "paper PDF does not contain the full author name"
 grep -F "0.3836027047090677" "$paper_text" >/dev/null || \
   fail "paper PDF does not contain the candidate coefficient"
 grep -F "AI-assisted" "$paper_text" >/dev/null || \
   fail "paper PDF does not contain the AI-assistance disclosure"
+grep -F "GPT-5.6 Pro" "$paper_text" >/dev/null || \
+  fail "paper PDF does not identify the AI model"
 
 find . -type f -name '*.md' \
   ! -path './.git/*' \

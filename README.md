@@ -1,5 +1,8 @@
 # Degree-3 spectral refinement: research-draft verification package
 
+**Author:** Bruce J. Swihart  
+**AI system disclosed:** OpenAI ChatGPT (GPT-5.6 Pro), accessed August-September 2026
+
 This is a **private, pre-release verification project** for a candidate
 refinement of Nishioka's lower bound for the three-dimensional
 Blaschke--Lebesgue problem. The repository now contains an integrated LaTeX
@@ -47,14 +50,16 @@ possible contribution is the independent degree-3 spectral mechanism.
 
 ## What remains before public release
 
-- Have the named author read and approve the complete manuscript, especially
-  the authorship, responsibility, and AI-assistance language.
-- Confirm that the first hosted GitHub Actions run passes the Python, R, and
-  document-build jobs.
-- Choose the public license and add final citation metadata in `CITATION.cff`.
+- Have the named author finish reading and approve the complete manuscript.
 - Perform and record a fresh-clone reproducibility test.
+- At the first public release, add the public repository URL, release version,
+  and release date to `CITATION.cff`.
 - Obtain outside mathematical review after the first public research-draft
   release.
+
+The first hosted GitHub Actions run has passed all three jobs. Authorship,
+AI-provenance, citation, and licensing metadata are now included in the
+repository.
 
 See `proof/PROOF_LEDGER.md`, `proof/CLAIM_DEPENDENCIES.md`,
 `proof/PROOF_AUDIT.md`, `proof/BRIDGE_LEMMAS.md`, and
@@ -74,10 +79,15 @@ Ubuntu jobs to:
 
 A green workflow run means that the posted code and document sources execute
 successfully in a fresh hosted environment. It does **not** constitute peer
-review or independent verification of the mathematical argument.
+review or independent verification of the mathematical argument. The document
+job also checks consistency of the author name, AI-system identification,
+citation metadata, and licensing declarations.
 
 - [Verification status](VERIFICATION_STATUS.md)
 - [Reproducibility guide](REPRODUCIBILITY.md)
+- [AI assistance and provenance](AI_ASSISTANCE.md)
+- [Licensing notice](LICENSE)
+- [Citation metadata](CITATION.cff)
 
 ## Typeset PDF versions of the Markdown documentation
 
@@ -87,6 +97,7 @@ math delimiters.  Typeset PDF counterparts are tracked under
 Markdown files remain the editable source of truth.
 
 - [Repository overview PDF](rendered/markdown/README.pdf)
+- [AI assistance and provenance PDF](rendered/markdown/AI_ASSISTANCE.pdf)
 - [Reproducibility guide PDF](rendered/markdown/REPRODUCIBILITY.pdf)
 - [Verification status PDF](rendered/markdown/VERIFICATION_STATUS.pdf)
 - [Cross-language comparison PDF](rendered/markdown/expected/CROSS_LANGUAGE_COMPARISON.pdf)

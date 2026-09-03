@@ -321,7 +321,7 @@ The manuscript makes the following provenance distinctions explicit:
 - HYRA is acknowledged as a public manuscript claiming stronger numerical
   bounds by a different method;
 - exact symbolic checks are distinguished from independent expert review;
-- AI assistance is disclosed, and no AI system is listed as an author.
+- AI assistance is disclosed by system and access period, and no AI system is listed as an author.
 
 ## 5. Literature-search status
 
@@ -337,21 +337,21 @@ inequalities under different notation.
 
 ## 6. Remaining gates before a public release
 
-1. Run `./run_r_checks.sh` after applying the manuscript patch and preserve both
-   R outputs and `R_session_info.txt`.
-2. Have the named author read the complete eight-page manuscript and approve
-   the wording of the authorship and AI-assistance statements.
-3. Add continuous-integration workflows that build the paper and run Python and
-   R checks from a clean environment.
-4. Add repository-level public-facing files: `LICENSE`, `CITATION.cff`, and a
-   concise `VERIFICATION_STATUS.md`.
-5. Perform a final fresh-clone test before changing repository visibility.
-6. Seek independent mathematical review after the first public research-draft
+1. Have the named author finish reading and approve the complete manuscript.
+2. Perform and record a final fresh-clone test.
+3. Add the public repository URL, release version, and release date to
+   `CITATION.cff` when preparing the first release.
+4. Seek independent mathematical review after the first public research-draft
    release.
+
+The exact Python and R checks, hosted three-job GitHub Actions workflow,
+research-paper build, Markdown-PDF build, metadata declarations, and PDF
+preflight have all passed internally or in the hosted environment. They do not
+replace independent subject-matter review.
 
 ## Release recommendation
 
-Do not make the repository public at this audit stage. The next internal commit
-should add this audit and the integrated manuscript. The following commit should
-add continuous integration and public-facing metadata. Only after a clean CI run
-and author review should a `v0.1.0` public research-draft release be created.
+Keep the repository private until the named author completes the manuscript
+review and a fresh-clone test is recorded. After those gates pass, prepare a
+`v0.1.0` public research-draft release, update the release-specific citation
+metadata, and preserve the verification language stated above.

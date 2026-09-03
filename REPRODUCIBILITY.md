@@ -110,7 +110,14 @@ On systems with GNU coreutils, use:
 sha256sum -c rendered/markdown/SHA256SUMS.txt
 ```
 
-### 5. PDF preflight
+### 5. Metadata and PDF preflight
+
+Check consistency of the author name, AI-system identification, citation file,
+and licensing declaration:
+
+```sh
+./ci/preflight_metadata.sh
+```
 
 With Poppler installed, validate the manuscript and every Markdown-derived PDF:
 
@@ -118,10 +125,10 @@ With Poppler installed, validate the manuscript and every Markdown-derived PDF:
 ./ci/preflight_pdfs.sh
 ```
 
-The check confirms that each PDF is nonempty and readable, has at least one
+The PDF check confirms that each PDF is nonempty and readable, has at least one
 page, contains extractable text, uses embedded fonts, and has a valid checksum
-when applicable. It also confirms that the manuscript contains the author name,
-candidate coefficient, and AI-assistance disclosure.
+when applicable. It also confirms that the manuscript contains the full author
+name, candidate coefficient, AI-assistance disclosure, and model designation.
 
 ## What is exact and what is numerical
 

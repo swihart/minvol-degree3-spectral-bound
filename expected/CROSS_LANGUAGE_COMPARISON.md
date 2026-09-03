@@ -1,7 +1,7 @@
 # Cross-language numerical comparison
 
 The Python stress test was executed in the assistant's container. The matching
-base-R stress test was executed by Bruce Swihart in his local R environment.
+base-R stress test was executed by Bruce J. Swihart in his local R environment.
 The two programs are independent implementations and use language-specific
 random-number generators, so they do not test the same random tensors even
 though both runs are deterministic within their own language.
@@ -14,12 +14,12 @@ though both runs are deterministic within their own language.
 | Candidate volume coefficient | `0.383602704709067716` | `0.383602704709068` | Agreement to all 15 digits printed by R. |
 
 All programmed numerical-stress acceptance thresholds passed in both languages.
-The new finite pairing-count table has passed the Python exact enumerator; the
-matching base-R enumerator is present but still awaits Bruce Swihart's local run.
+The finite pairing-count table also passed independent Python and base-R
+enumerators. The repository's first hosted GitHub Actions run subsequently
+completed all three verification jobs successfully.
 
 This is strong cross-language numerical evidence for the tensor conventions and
-constants. It is not a proof of the full lower bound. In particular, the general
-symbolic integration is currently implemented only in Python/SymPy, and the
-full argument still requires a publication-ready LaTeX write-up and
-outside review.  The bridge and degree-3 tensor derivations now exist as detailed
-Markdown proof drafts.
+constants. It is not a proof of the full lower bound. The general symbolic
+integration is implemented in Python/SymPy, while the full mathematical argument
+is presented in the LaTeX research draft and still awaits independent
+subject-matter review.

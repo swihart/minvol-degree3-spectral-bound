@@ -124,6 +124,9 @@ jobs:
       - name: Build Markdown-derived PDFs
         run: ./build_markdown_pdfs.sh
 
+      - name: Preflight metadata
+        run: ./ci/preflight_metadata.sh
+
       - name: Preflight generated PDFs
         run: ./ci/preflight_pdfs.sh
 

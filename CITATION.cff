@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: >-
+  Please cite the research draft in preferred-citation and identify the
+  repository commit or release used.
+title: "Degree-3 spectral refinement verification package"
+type: software
+authors:
+  - family-names: "Swihart"
+    given-names: "Bruce J."
+abstract: >-
+  Reproducible research package for an AI-assisted candidate degree-3 spectral
+  refinement of Nishioka's lower bound for the three-dimensional
+  Blaschke-Lebesgue problem. The package contains a LaTeX manuscript, proof
+  notes, exact symbolic Python checks, independent R tests, and automated build
+  and preflight workflows.
+keywords:
+  - "bodies of constant width"
+  - "Blaschke-Lebesgue problem"
+  - "spherical harmonics"
+  - "convex geometry"
+  - "reproducible research"
+preferred-citation:
+  type: unpublished
+  title: >-
+    A Degree-Three Spectral Refinement of Nishioka's Lower Bound for the
+    Three-Dimensional Blaschke-Lebesgue Problem
+  authors:
+    - family-names: "Swihart"
+      given-names: "Bruce J."
+  year: 2026
+  license: CC-BY-4.0
+  notes: >-
+    AI-assisted, non-peer-reviewed research draft seeking independent
+    mathematical verification.
