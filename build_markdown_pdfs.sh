@@ -13,6 +13,7 @@ OUT_ROOT=${1:-rendered/markdown}
 TITLE_FILTER=tools/markdown_pdf/first_h1_title.lua
 MATH_FILTER=tools/markdown_pdf/math_display_fixes.lua
 PREAMBLE=tools/markdown_pdf/preamble.tex
+SOURCE_LISTER=tools/markdown_pdf/list_markdown_sources.sh
 
 for command_name in pandoc xelatex python3; do
   if ! command -v "$command_name" >/dev/null 2>&1; then
@@ -24,10 +25,7 @@ done
 rm -rf "$OUT_ROOT"
 mkdir -p "$OUT_ROOT"
 
-find . -type f -name '*.md' \
-  ! -path './.git/*' \
-  ! -path './rendered/*' \
-  | LC_ALL=C sort \
+sh "$SOURCE_LISTER" \
   | while IFS= read -r source; do
       relative=${source#./}
       destination="$OUT_ROOT/${relative%.md}.pdf"

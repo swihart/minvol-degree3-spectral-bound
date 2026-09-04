@@ -72,10 +72,7 @@ grep -F "AI-assisted" "$paper_text" >/dev/null || \
 grep -F "GPT-5.6 Pro" "$paper_text" >/dev/null || \
   fail "paper PDF does not identify the AI model"
 
-find . -type f -name '*.md' \
-  ! -path './.git/*' \
-  ! -path './rendered/*' \
-  | LC_ALL=C sort > "$markdown_sources"
+sh tools/markdown_pdf/list_markdown_sources.sh > "$markdown_sources"
 
 source_count=$(wc -l < "$markdown_sources" | tr -d ' ')
 pdf_count=$(find rendered/markdown -type f -name '*.pdf' | wc -l | tr -d ' ')
