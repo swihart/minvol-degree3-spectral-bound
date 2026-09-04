@@ -1,6 +1,6 @@
 # Verification status
 
-**Last updated:** September 3, 2026  
+**Last updated:** September 4, 2026  
 **Named author:** Bruce J. Swihart  
 **AI system disclosed:** OpenAI ChatGPT (GPT-5.6 Pro), accessed August-September 2026
 
@@ -36,7 +36,8 @@ degree-3 spectral mechanism, not the strongest currently claimed coefficient.
 | Numerical convention checks | Deterministic quadrature, random tensors, and rotational tests | Passed independently in Python and R |
 | Human-readable proof | Bridge lemmas and the degree-3 tensor identity are written line by line | Drafted and internally audited |
 | Integrated manuscript | Complete LaTeX research note compiles to PDF | Passed internally |
-| Hosted clean-environment checks | GitHub Actions runs Python, R, paper, Markdown-PDF, metadata, and PDF preflight checks | First three-job run passed |
+| Hosted clean-environment checks | GitHub Actions runs Python, R, paper, Markdown-PDF, metadata, and PDF preflight checks | All three jobs passed for the tested commit |
+| Fresh-clone reproducibility | A separate clone of commit `96cea5727507` ran all checks and builds | Passed; rebuilt tracked tree remained byte-clean |
 | Authorship and AI provenance | Full author name and the AI system, scope, access period, and limits are recorded | Documented |
 | Citation and licensing | `CITATION.cff` and separate prose/software license terms are present | Documented; release URL and version still pending |
 | External mathematical review | Review by an independent subject-matter expert | Not yet completed |
@@ -59,6 +60,15 @@ A green workflow establishes that the checked computations, metadata checks,
 and document builds run successfully in the recorded CI environments. It does
 **not** establish that the theorem has been independently proved, certified, or
 peer reviewed.
+
+## Recorded clean-clone result
+
+Commit `96cea57275070f21babf30477ab1b128ec0f5eb6` was cloned into a new temporary
+directory on 2026-09-04. All Python and R checks ran, all tracked PDFs rebuilt,
+and the resulting tracked working tree was clean. The local Mac lacked Poppler,
+so basic PDF and checksum checks were performed locally and the full PDF
+preflight was supplied by the green GitHub Actions document job. See
+[`CLEAN_CLONE_CHECK.md`](CLEAN_CLONE_CHECK.md).
 
 ## Language approved for public use
 

@@ -18,6 +18,18 @@ The GitHub Actions workflow uses:
 
 The workflow file is `.github/workflows/verification.yml`.
 
+## Recorded successful clean clone
+
+A clean-clone reproduction was completed on 2026-09-04 for commit
+`96cea57275070f21babf30477ab1b128ec0f5eb6`. The isolated clone ran the Python
+and R suites, rebuilt the manuscript and every Markdown-derived PDF, passed the
+metadata and local checksum checks, and remained byte-clean afterward. The full
+Poppler PDF preflight was delegated to the three-job GitHub Actions run, which
+was green for the same commit.
+
+The complete environment and interpretation are recorded in
+[`CLEAN_CLONE_CHECK.md`](CLEAN_CLONE_CHECK.md).
+
 ## Fresh-clone procedure
 
 Clone the repository and enter its root directory:
@@ -85,7 +97,7 @@ paper/degree3_spectral_refinement.pdf
 
 ### 4. Markdown-derived PDFs
 
-With Pandoc 3 or later, Python 3, and XeLaTeX available:
+With Pandoc, Python 3, and XeLaTeX available:
 
 ```sh
 ./build_markdown_pdfs.sh
@@ -142,10 +154,11 @@ a substitute for mathematical review of the proof.
 
 The build scripts fix the source-date epoch and normalize PDF trailer
 identifiers. Repeated builds with an unchanged toolchain are intended to be
-byte-for-byte reproducible. Different operating systems, TeX Live releases,
-fonts, or Pandoc versions may still produce visually equivalent but
-byte-different PDFs. The editable Markdown and LaTeX sources remain the source
-of truth.
+byte-for-byte reproducible. Different operating systems, TeX Live releases, fonts, or Pandoc versions may
+still produce visually equivalent but byte-different PDFs. In the recorded
+2026-09-04 clean-clone run, however, macOS with Pandoc 2.19.2 and TeX Live 2022
+reproduced all tracked outputs byte for byte. The editable Markdown and LaTeX
+sources remain the source of truth.
 
 ## GitHub Actions
 

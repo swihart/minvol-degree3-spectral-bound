@@ -47,19 +47,25 @@ possible contribution is the independent degree-3 spectral mechanism.
 - The complete proof has been merged into an eight-page LaTeX manuscript in
   `paper/degree3_spectral_refinement.tex`; the tracked PDF was built and
   visually inspected in this project environment.
+- A fresh clone of commit
+  `96cea57275070f21babf30477ab1b128ec0f5eb6` reproduced every check and build
+  and left the tracked working tree byte-clean; see `CLEAN_CLONE_CHECK.md`.
 
 ## What remains before public release
 
 - Have the named author finish reading and approve the complete manuscript.
-- Perform and record a fresh-clone reproducibility test.
+- Perform a final release-candidate audit and rerun the clean-clone check after
+  all release-specific metadata is fixed.
 - At the first public release, add the public repository URL, release version,
   and release date to `CITATION.cff`.
 - Obtain outside mathematical review after the first public research-draft
   release.
 
-The first hosted GitHub Actions run has passed all three jobs. Authorship,
-AI-provenance, citation, and licensing metadata are now included in the
-repository.
+The hosted GitHub Actions workflow passes all three jobs. A separate local
+fresh-clone run also passed at commit
+`96cea57275070f21babf30477ab1b128ec0f5eb6` and left the rebuilt tracked tree
+byte-clean. Authorship, AI-provenance, citation, and licensing metadata are
+included in the repository.
 
 See `proof/PROOF_LEDGER.md`, `proof/CLAIM_DEPENDENCIES.md`,
 `proof/PROOF_AUDIT.md`, `proof/BRIDGE_LEMMAS.md`, and
@@ -86,6 +92,7 @@ citation metadata, and licensing declarations.
 - [Verification status](VERIFICATION_STATUS.md)
 - [Reproducibility guide](REPRODUCIBILITY.md)
 - [AI assistance and provenance](AI_ASSISTANCE.md)
+- [Recorded clean-clone verification](CLEAN_CLONE_CHECK.md)
 - [Licensing notice](LICENSE)
 - [Citation metadata](CITATION.cff)
 
@@ -98,6 +105,7 @@ Markdown files remain the editable source of truth.
 
 - [Repository overview PDF](rendered/markdown/README.pdf)
 - [AI assistance and provenance PDF](rendered/markdown/AI_ASSISTANCE.pdf)
+- [Recorded clean-clone verification PDF](rendered/markdown/CLEAN_CLONE_CHECK.pdf)
 - [Reproducibility guide PDF](rendered/markdown/REPRODUCIBILITY.pdf)
 - [Verification status PDF](rendered/markdown/VERIFICATION_STATUS.pdf)
 - [Cross-language comparison PDF](rendered/markdown/expected/CROSS_LANGUAGE_COMPARISON.pdf)
@@ -114,7 +122,9 @@ Regenerate every Markdown-derived PDF from the repository root with:
 ./build_markdown_pdfs.sh
 ```
 
-The build requires Pandoc 3 or later, Python 3, and a XeLaTeX installation.
+The build requires Pandoc, Python 3, and a XeLaTeX installation. The current
+pipeline has passed with Pandoc 2.19.2 locally and Pandoc 3.10.1 in GitHub
+Actions.
 The script recognizes the `\(...\)` and `\[...\]` delimiters used in the
 proof notes, converts the few multi-line tagged displays to valid `amsmath`
 environments, normalizes the PDF trailer identifiers for reproducible output,

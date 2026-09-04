@@ -335,23 +335,35 @@ This was not a systematic literature review and must not be treated as a proof
 of novelty. A specialist may know relevant representation-theoretic or invariant
 inequalities under different notation.
 
-## 6. Remaining gates before a public release
+## 6. Clean-clone verification and remaining release gates
+
+A separate clone of commit
+`96cea57275070f21babf30477ab1b128ec0f5eb6` successfully ran the exact Python
+suite, the independent R suite, the paper build, the Markdown-PDF build, and the
+metadata and checksum checks. The rebuilt tracked working tree remained
+byte-clean. Full Poppler PDF preflight was unavailable on the local Mac and was
+delegated to the green GitHub Actions document job. The detailed record is in
+`CLEAN_CLONE_CHECK.md`.
+
+The remaining gates before a public release are:
 
 1. Have the named author finish reading and approve the complete manuscript.
-2. Perform and record a final fresh-clone test.
+2. Complete a release-candidate audit and rerun the clean-clone check after all
+   release-specific metadata has been fixed.
 3. Add the public repository URL, release version, and release date to
    `CITATION.cff` when preparing the first release.
 4. Seek independent mathematical review after the first public research-draft
    release.
 
 The exact Python and R checks, hosted three-job GitHub Actions workflow,
-research-paper build, Markdown-PDF build, metadata declarations, and PDF
-preflight have all passed internally or in the hosted environment. They do not
-replace independent subject-matter review.
+research-paper build, Markdown-PDF build, metadata declarations, PDF preflight,
+and initial clean-clone reproduction have passed. They do not replace
+independent subject-matter review.
 
 ## Release recommendation
 
 Keep the repository private until the named author completes the manuscript
-review and a fresh-clone test is recorded. After those gates pass, prepare a
-`v0.1.0` public research-draft release, update the release-specific citation
-metadata, and preserve the verification language stated above.
+review and the release-candidate audit is complete. Then prepare a `v0.1.0`
+public research-draft release, update the release-specific citation metadata,
+run the final clean-clone gate, and preserve the verification language stated
+above.

@@ -9,6 +9,7 @@ Status labels:
 - **Formal write-up drafted**: a line-by-line proof is in the repository, but has not received outside review.
 - **Integrated manuscript drafted**: the claim has been merged into the LaTeX research note and compiled.
 - **Hosted CI passed**: all configured GitHub Actions jobs completed successfully in a clean hosted environment.
+- **Fresh-clone passed**: a newly cloned checkout ran all checks and builds and remained byte-clean.
 - **Needs local rerun**: a matching check exists but should be rerun and preserved in the current repository state.
 - **Needs external review**: no independent subject-matter expert has checked it.
 
@@ -30,7 +31,8 @@ Status labels:
 | R1 | Passage to nonsmooth bodies | Nishioka's approximation lemma; `BRIDGE_LEMMAS.md`, Theorem 7.1 | Sourced; formal write-up drafted; needs external review |
 | P1 | Complete paper source compiles without unresolved references | `paper/degree3_spectral_refinement.tex`; `build_paper.sh` | Integrated manuscript drafted; runtime-tested in project environment |
 | P2 | PDF has no visible clipping, overlap, or broken glyphs | Eight rendered pages inspected at 180 dpi | Render-checked |
-| C1 | Hosted clean-environment checks for Python, R, the paper, metadata, and Markdown PDFs | `.github/workflows/verification.yml`; three green jobs reported on September 3, 2026 | Hosted CI passed |
+| C1 | Hosted clean-environment checks for Python, R, the paper, metadata, and Markdown PDFs | `.github/workflows/verification.yml`; three green jobs confirmed for the tested commit on September 4, 2026 | Hosted CI passed |
+| C2 | Fresh-clone reproduction of all checks and tracked builds | `CLEAN_CLONE_CHECK.md`; commit `96cea5727507` | Fresh-clone passed; rebuilt tracked tree byte-clean |
 | D1 | Public-facing verification and reproduction instructions | `VERIFICATION_STATUS.md`; `REPRODUCIBILITY.md` | Drafted and integrated |
 | M1 | Authorship, AI provenance, citation, and licensing metadata | `AI_ASSISTANCE.md`; `CITATION.cff`; `LICENSE`; manuscript declaration; metadata preflight | Drafted and integrated; public release URL/version pending |
 | L1 | Exact constant/decimal not found in a targeted web search | Search terms and limitations recorded in `PROOF_AUDIT.md` | Preliminary only; not a systematic novelty review |
@@ -39,11 +41,12 @@ Status labels:
 ## Current bottleneck
 
 The internal proof chain, integrated manuscript, hosted verification workflow,
-and authorship/provenance metadata are complete. The remaining internal gates
-are:
+authorship/provenance metadata, and an initial clean-clone reproduction are
+complete. The remaining internal gates are:
 
 1. have the named author finish reading and approve the manuscript;
-2. perform and record a fresh-clone test before public release; and
+2. complete the release-candidate audit and rerun the clean-clone check after
+   release-specific metadata is fixed; and
 3. add the public repository URL, release version, and release date to
    `CITATION.cff` when the first public release is prepared.
 
