@@ -157,8 +157,8 @@ identifiers. Repeated builds with an unchanged toolchain are intended to be
 byte-for-byte reproducible. Different operating systems, TeX Live releases, fonts, or Pandoc versions may
 still produce visually equivalent but byte-different PDFs. In the recorded
 2026-09-04 clean-clone run, however, macOS with Pandoc 2.19.2 and TeX Live 2022
-reproduced all tracked outputs byte for byte. The editable Markdown and LaTeX
-sources remain the source of truth.
+reproduced all tracked outputs byte for byte. The Markdown and LaTeX files are the editable source files; the tracked PDFs
+are rendered counterparts provided for convenient reading.
 
 ## GitHub Actions
 

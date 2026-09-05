@@ -29,8 +29,9 @@ Status labels:
 | F2 | Projection/duality step `||C||_2^2 = <A_h,C> <= (d/2) integral ||C||_*` | `BRIDGE_LEMMAS.md`, Corollary 2.3 and Lemmas 5.1--5.2 | Hand-checked; formal write-up drafted; needs external review |
 | A1 | Final exact coefficient, decimal, and strict improvement | SymPy exact arithmetic; `BRIDGE_LEMMAS.md`, Theorem 6.2 and Corollary 6.3 | Exact-code checked; hand-checked; integrated manuscript drafted |
 | R1 | Passage to nonsmooth bodies | Nishioka's approximation lemma; `BRIDGE_LEMMAS.md`, Theorem 7.1 | Sourced; formal write-up drafted; needs external review |
-| P1 | Complete paper source compiles without unresolved references | `paper/degree3_spectral_refinement.tex`; `build_paper.sh` | Integrated manuscript drafted; runtime-tested in project environment |
-| P2 | PDF has no visible clipping, overlap, or broken glyphs | Eight rendered pages inspected at 180 dpi | Render-checked |
+| P1 | Complete paper source compiles without unresolved references | `paper/degree3_spectral_refinement.tex`; `build_paper.sh` | Author-review revision integrated; runtime-tested in project environment |
+| P2 | PDF has no visible clipping, overlap, or broken glyphs | Nine rendered pages inspected at 180 dpi after author-review revision | Render-checked |
+| P3 | Named-author understanding review of the proof architecture | Twelve-question structured review and resulting exposition changes | Completed at the conceptual level; revised manuscript awaits final author approval |
 | C1 | Hosted clean-environment checks for Python, R, the paper, metadata, and Markdown PDFs | `.github/workflows/verification.yml`; three green jobs confirmed for the tested commit on September 4, 2026 | Hosted CI passed |
 | C2 | Fresh-clone reproduction of all checks and tracked builds | `CLEAN_CLONE_CHECK.md`; commit `96cea5727507` | Fresh-clone passed; rebuilt tracked tree byte-clean |
 | D1 | Public-facing verification and reproduction instructions | `VERIFICATION_STATUS.md`; `REPRODUCIBILITY.md` | Drafted and integrated |
@@ -44,7 +45,7 @@ The internal proof chain, integrated manuscript, hosted verification workflow,
 authorship/provenance metadata, and an initial clean-clone reproduction are
 complete. The remaining internal gates are:
 
-1. have the named author finish reading and approve the manuscript;
+1. have the named author inspect and approve the revised manuscript and total package;
 2. complete the release-candidate audit and rerun the clean-clone check after
    release-specific metadata is fixed; and
 3. add the public repository URL, release version, and release date to

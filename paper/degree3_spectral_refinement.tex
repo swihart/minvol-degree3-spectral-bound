@@ -113,6 +113,13 @@ sharp inequality
 It quantifies a restriction intrinsic to cubic spherical harmonics and leads to
 a reduced degree-three curvature budget.
 
+The proof proceeds as follows. Section~2 separates the degree-three curvature
+energy $N_3$ from the higher-mode tail. Section~3 proves the determinant
+inequality special to cubic spherical harmonics. Section~4 converts that
+estimate into nuclear-norm control and combines it with Nishioka's pointwise
+operator-norm constraint to cap $N_3$. Section~5 then combines the cubic cap,
+the refined spectral split, and the support-function volume formula.
+
 Harrell's variational formulation in terms of the sum of principal radii of
 curvature supplies useful historical and conceptual context: in dimension three
 that formulation is a relaxation because not every admissible scalar curvature
@@ -252,6 +259,60 @@ $\ell\ge5$. Orthogonality therefore gives
  =\frac1{58}N+\frac9{319}N_3.
 \]
 \end{proof}
+Since
+\[
+ \frac{9}{319}
+ =
+ \frac{1}{22}-\frac{1}{58},
+\]
+the estimate may equivalently be written as
+\[
+ E(h)
+ \le
+ \frac1{22}N-\frac9{319}(N-N_3).
+\]
+Thus, at the spectral-splitting stage, the reduction relative to
+Nishioka's bound $E(h)\le N/22$ is exactly the nonnegative correction
+\[
+ \frac9{319}(N-N_3).
+\]
+This correction is positive whenever higher-degree energy is present
+and vanishes when $N=N_3$, equivalently when $h\in\Harm_3$.  The
+pure degree-three case is treated separately below by the improved
+budget estimate for $N_3$.
+
+
+
+\begin{remark}[Continuing the spectral split]\label{rem:degree-five}
+Let
+\[
+ N_5:=\norm{A_{h_5}}_2^2.
+\]
+Since the coefficient
+\[
+ \frac{1}{2(\lambda_\ell-1)}
+\]
+equals $1/58$ at $\ell=5$ and is at most $1/110$ for every odd
+$\ell\ge7$, the splitting can be refined to
+\[
+ E(h)\le
+ \frac1{22}N_3+\frac1{58}N_5
+ +\frac1{110}(N-N_3-N_5).
+\]
+This refinement alone does not improve
+Proposition~\ref{prop:spectral-split}. With only
+\[
+ 0\le N_5\le N-N_3
+\]
+available, the right-hand side is increasing in $N_5$ and is therefore
+maximized at $N_5=N-N_3$. Substitution then recovers
+\[
+ E(h)\le
+ \frac1{22}N_3+\frac1{58}(N-N_3).
+\]
+Thus a useful degree-five refinement requires an additional estimate on
+$N_5$, or a coupled constraint involving $N_3$ and $N_5$.
+\end{remark}
 
 \section{The degree-three determinant inequality}
 
@@ -337,10 +398,19 @@ The quadratic consequences needed below are
  \qquad
  \int_{\Sph}\abs{M}^2\dd=\frac{4\pi}{3}\tau.
 \end{equation}
-Combining \eqref{eq:norm-C-point} with \eqref{eq:quadratic-moments} gives
-\begin{equation}\label{eq:C-norm-invariant}
- \norm{C}_2^2=\frac{176\pi}{7}\tau.
-\end{equation}
+Integrating \eqref{eq:norm-C-point} over $\Sph$ and substituting
+\eqref{eq:quadratic-moments}, we obtain
+\begin{align}
+ \norm{C}_2^2
+ &=36\frac{4\pi}{3}\tau
+   -72\frac{8\pi}{15}\tau
+   +68\frac{8\pi}{35}\tau \notag\\
+ &=\frac{176\pi}{7}\tau.
+ \label{eq:C-norm-invariant}
+\end{align}
+Equivalently, \eqref{eq:nishioka-mode} with $\lambda_3=12$ gives
+$\norm{C}_2^2=110\norm{Y}_{L^2}^2$, which yields the same result from the
+first identity in \eqref{eq:quadratic-moments}.
 
 For the quartic calculation, define
 \[
@@ -386,8 +456,13 @@ sums to $\tau^2+2J$. Thus $4J+2\mathcal K=\tau^2+2J$, which is
 
 The pairing expansion from \eqref{eq:sphere-moment}, together with
 Lemma~\ref{lem:quartic-relation}, yields the six moment identities in
-Table~\ref{tab:moments}. Appendix~\ref{app:pairings} gives the complete
-contraction count.
+Table~\ref{tab:moments}. Appendix~\ref{app:pairings} records the contraction
+counts and works out representative pure and mixed rows. A complete row-by-row
+slot count, including the fixed contractions in all mixed moments, is provided
+in Sections~7--8 of the accompanying repository document
+\path{rendered/markdown/proof/DEGREE3_TENSOR_IDENTITY.pdf} (editable source:
+\path{proof/DEGREE3_TENSOR_IDENTITY.md}); the exact Python and R pairing
+enumerators independently reproduce the same table.
 
 \begin{table}[ht]
 \centering
@@ -570,6 +645,48 @@ More precisely, with $s=\sqrt{15183/17303}$,
 \]
 \end{corollary}
 
+\section{Discussion: a spectral hierarchy}
+
+The argument above may be viewed as the first level of a hierarchy of
+low-degree spectral relaxations. Nishioka's estimate applies the largest mode
+coefficient, $1/22$, to the entire curvature budget. The present argument
+retains the degree-three quantity
+\[
+ N_3=\norm{A_{h_3}}_2^2
+\]
+as an additional variable and obtains a nontrivial bound on it from the special
+algebraic structure of $\Harm_3$.
+
+The spectral decomposition itself can be refined indefinitely. For example,
+Remark~\ref{rem:degree-five} isolates
+\[
+ N_5=\norm{A_{h_5}}_2^2
+\]
+and assigns the smaller coefficient $1/110$ to all remaining odd degrees.
+Spectral coefficients alone, however, do not improve the final bound: without
+further information, the relaxed optimization places the entire remaining
+curvature budget in $\Harm_5$, whose coefficient $1/58$ is the largest among
+the remaining modes.
+
+A sharper continuation therefore requires geometric information beyond the
+diagonal harmonic decomposition. Two natural possibilities are:
+\begin{enumerate}[label=(\roman*),leftmargin=2em]
+ \item a degree-five analogue of Proposition~\ref{prop:cubic-budget}, giving a
+ nontrivial upper bound on $N_5$; or
+ \item a coupled inequality for $(N_3,N_5)$ derived directly from the
+ pointwise constraint
+ \[
+  -\frac d2\Id\preceq A_h\preceq\frac d2\Id.
+ \]
+\end{enumerate}
+The coupled alternative may be stronger, because the degree-three and
+degree-five components need not be capable of simultaneously saturating
+separate mode-wise estimates. Since $\dim\Harm_5=11$ and the relevant invariant
+algebra is more complicated than in degree three, exact symbolic computation
+or certified finite-dimensional optimization may be useful. This is consistent
+with Nishioka's proposed use of additional variables and certified
+computer-assisted estimates \cite{Nishioka2027}.
+
 \section{Reproducibility and disclosure}
 
 The accompanying repository separates the mathematical derivation from the
@@ -643,11 +760,29 @@ $\abs M^4$ & 1 & 2 & 0 & 1 & 2 \\
 For example, in $Y^4$ the disconnected type contributes
 $3(3!)^2=108$ pairings, the tetrahedral type contributes $(3!)^4=1296$, and
 the six labeled $J$ graphs contribute
-$6\cdot 3^4(2!)^2=1944$. The other rows follow by the same slot-counting
-argument with the scalar contractions in $\abs v^2$ and $\abs M^2$ fixed.
-The repository script \texttt{python/verify\_pairing\_counts.py} exhaustively
+$6\cdot 3^4(2!)^2=1944$.
+
+As a representative mixed row, consider $Y^2\abs v^2$. Label the two copies of
+$T$ arising from $Y^2$ by vertices $1,2$ and those arising from $\abs v^2$ by
+vertices $3,4$. The scalar contraction in $\abs v^2$ fixes one edge $34$,
+leaving ten sphere-coordinate indices. Type $D$ contributes $3!2!=12$ slot
+pairings, while type $\mathcal K$ contributes $3!3!2!2!=144$. For type $J$,
+two labeled graphs use $34$ as a doubled edge and contribute $72$ each, and
+two use it as a single edge and contribute $36$ each, for a total of $216$.
+After substituting $\mathcal K=\tau^2/2-J$, the reduced coefficients are
+$84$ for $\tau^2$ and $72$ for $J$. Since the spherical moment factor is
+$4\pi/11!!$, this gives
+\[
+ \int_{\Sph}Y^2\abs v^2\dd
+ =\frac{4\pi}{11!!}(84\tau^2+72J)
+ =\pi\left(\frac{16}{495}\tau^2+\frac{32}{1155}J\right),
+\]
+which is the second row of Table~\ref{tab:moments}. The remaining mixed rows
+follow by the same slot-counting argument with the scalar contractions in
+$\abs v^2$ and $\abs M^2$ fixed.
+The repository script \path{python/verify_pairing_counts.py} exhaustively
 enumerates the pairings and reproduces the table exactly; the base-R script
-\texttt{R/verify\_pairing\_counts.R} is an independent implementation.
+\path{R/verify_pairing_counts.R} is an independent implementation.
 
 Multiplication by $4\pi/(2m+1)!!$, where $2m$ is the number of remaining
 sphere-coordinate factors, gives Table~\ref{tab:moments}.

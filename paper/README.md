@@ -20,6 +20,17 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error degree3_spectral_refinement
 
 The tracked PDF is `degree3_spectral_refinement.pdf`.
 
+## Supporting proof documentation
+
+For a deeper audit of the two nonroutine parts of the argument, see:
+
+- [`../proof/DEGREE3_TENSOR_IDENTITY.md`](../proof/DEGREE3_TENSOR_IDENTITY.md)
+  for the expanded cubic-tensor and quartic-moment derivation; and
+- [`../proof/BRIDGE_LEMMAS.md`](../proof/BRIDGE_LEMMAS.md) for the expanded
+  projection, nuclear-norm, duality, and smooth-approximation steps.
+
+Typeset PDF versions are available under `../rendered/markdown/proof/`.
+
 ## AI-assistance declaration
 
 The manuscript identifies the system used as OpenAI ChatGPT (GPT-5.6 Pro),

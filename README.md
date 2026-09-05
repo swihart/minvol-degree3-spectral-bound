@@ -12,16 +12,53 @@ research draft, but it is not yet ready for public release.
 
 The proposed bound is
 
-\[
-\operatorname{Vol}(K) \ge
+$$
+\mathrm{Vol}(K) \ge
 \frac{\pi}{1914}
 \left(259-27\sqrt{\frac{15183}{17303}}\right)d^3
-\approx 0.3836027047\,d^3.
-\]
+\approx 0.3836027047d^3.
+$$
 
 Nishioka's published coefficient is `4*pi/33 ~= 0.3807991095`.
-The candidate is numerically weaker than the much newer HYRA claims; its
-possible contribution is the independent degree-3 spectral mechanism.
+The candidate's possible contribution is the independent degree-3 spectral
+mechanism rather than a numerically leading coefficient.
+
+### Related recent work
+
+A recent public HYRA manuscript,
+[*A Certified Geometric Lower Bound for the Three-Dimensional
+Blaschke--Lebesgue Problem*](https://github.com/Tencent-Hunyuan/Hyra-results/tree/main/AI4Science/3d_blaschke_lebesgue),
+claims substantially stronger analytic and computer-assisted lower bounds by a
+different geometric method. Those claims have not been independently verified
+in this project. The contribution proposed here is instead a degree-3 spectral
+refinement of Nishioka's argument.
+
+## How to review this claim
+
+A first-time reviewer can follow this path:
+
+1. Read the [main research draft](paper/degree3_spectral_refinement.pdf) for the
+   integrated statement and proof.
+2. Audit the novel algebra in the
+   [expanded degree-3 tensor derivation](rendered/markdown/proof/DEGREE3_TENSOR_IDENTITY.pdf)
+   ([editable Markdown](proof/DEGREE3_TENSOR_IDENTITY.md)).
+3. Audit the route from the determinant estimate to the volume bound in the
+   [expanded bridge lemmas](rendered/markdown/proof/BRIDGE_LEMMAS.pdf)
+   ([editable Markdown](proof/BRIDGE_LEMMAS.md)).
+4. Use the [claim-dependency graph](rendered/markdown/proof/CLAIM_DEPENDENCIES.pdf)
+   ([editable Markdown](proof/CLAIM_DEPENDENCIES.md)) to locate the source or
+   proof for each major step.
+5. Consult the [proof ledger](rendered/markdown/proof/PROOF_LEDGER.pdf),
+   [verification-status statement](rendered/markdown/VERIFICATION_STATUS.pdf),
+   and [internal proof audit](rendered/markdown/proof/PROOF_AUDIT.pdf) to see
+   what has and has not been checked.
+6. Follow the [reproducibility guide](rendered/markdown/REPRODUCIBILITY.pdf) to
+   rerun the exact Python checks, independent R checks, and document builds.
+
+The proof strategy is to isolate the degree-3 curvature energy, control the
+determinant of its curvature tensor, convert that control to a nuclear-norm
+estimate, use operator/nuclear duality to cap the degree-3 budget, and charge
+all remaining harmonic energy at the smaller coefficient `1/58`.
 
 ## What has been checked
 
@@ -44,7 +81,7 @@ possible contribution is the independent degree-3 spectral mechanism.
 - The contraction-graph table is independently enumerated by exact Python code;
   a matching base-R script is included for cross-language checking.
 - An internal line-by-line audit is recorded in `proof/PROOF_AUDIT.md`.
-- The complete proof has been merged into an eight-page LaTeX manuscript in
+- The complete proof has been merged into a LaTeX manuscript in
   `paper/degree3_spectral_refinement.tex`; the tracked PDF was built and
   visually inspected in this project environment.
 - A fresh clone of commit
@@ -53,7 +90,7 @@ possible contribution is the independent degree-3 spectral mechanism.
 
 ## What remains before public release
 
-- Have the named author finish reading and approve the complete manuscript.
+- Have the named author inspect and approve the revised manuscript and total package.
 - Perform a final release-candidate audit and rerun the clean-clone check after
   all release-specific metadata is fixed.
 - At the first public release, add the public repository URL, release version,

@@ -1,8 +1,11 @@
 # Internal proof audit for the degree-3 spectral refinement
 
-**Audit date:** 2026-09-02  
+**Initial audit date:** 2026-09-02
+
+**Author-review update:** 2026-09-05
+
 **Scope:** `proof/BRIDGE_LEMMAS.md`, `proof/DEGREE3_TENSOR_IDENTITY.md`,
-the exact Python checks, the independent R checks, and the first integrated
+the exact Python checks, the independent R checks, and the current integrated
 LaTeX manuscript.
 
 ## Audit conclusion
@@ -301,7 +304,7 @@ sharp on `H_3`.
 
 ## 4. Publication-draft audit
 
-The first integrated manuscript is in:
+The current integrated manuscript is in:
 
 ```text
 paper/degree3_spectral_refinement.tex
@@ -310,8 +313,14 @@ paper/degree3_spectral_refinement.pdf
 
 The PDF was built with `latexmk`, rendered at 180 dpi, and visually inspected
 page by page. The audit found no clipped text, overlapping equations, broken
-glyphs, or unresolved references. The PDF contains eight US-letter pages and
-embedded fonts.
+glyphs, or unresolved references. The revised PDF contains nine US-letter pages and embedded fonts.
+
+The author-review revision adds a proof roadmap, an explicit derivation of the
+normalization in equation (14), a degree-five spectral-splitting remark, a
+discussion of the resulting spectral hierarchy, a representative mixed-moment
+pairing calculation, and stronger navigation to the expanded proof documents.
+These changes do not alter the claimed coefficient or the logical dependencies
+of the proof.
 
 The manuscript makes the following provenance distinctions explicit:
 
@@ -347,7 +356,7 @@ delegated to the green GitHub Actions document job. The detailed record is in
 
 The remaining gates before a public release are:
 
-1. Have the named author finish reading and approve the complete manuscript.
+1. Have the named author inspect and approve the revised manuscript and total package.
 2. Complete a release-candidate audit and rerun the clean-clone check after all
    release-specific metadata has been fixed.
 3. Add the public repository URL, release version, and release date to
