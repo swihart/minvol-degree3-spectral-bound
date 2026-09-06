@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - "v*"
   pull_request:
   workflow_dispatch:
 
@@ -129,6 +131,9 @@ jobs:
 
       - name: Preflight metadata
         run: ./ci/preflight_metadata.sh
+
+      - name: Preflight release metadata
+        run: ./ci/preflight_release.sh
 
       - name: Preflight generated PDFs
         run: ./ci/preflight_pdfs.sh

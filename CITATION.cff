@@ -1,18 +1,23 @@
 cff-version: 1.2.0
 message: >-
-  Please cite the research draft in preferred-citation and identify the
-  repository commit or release used.
-title: "Degree-3 spectral refinement verification package"
+  Please cite the research draft in preferred-citation below and identify the
+  repository version used. This file describes release v0.1.0.
+title: "Degree-3 spectral refinement research and verification package"
 type: software
+version: "0.1.0"
+date-released: "2026-09-06"
+repository-code: "https://github.com/swihart/minvol-degree3-spectral-bound"
+url: "https://github.com/swihart/minvol-degree3-spectral-bound/releases/tag/v0.1.0"
 authors:
   - family-names: "Swihart"
     given-names: "Bruce J."
 abstract: >-
-  Reproducible research package for an AI-assisted candidate degree-3 spectral
+  Reproducible research package for an AI-assisted degree-3 spectral
   refinement of Nishioka's lower bound for the three-dimensional
-  Blaschke-Lebesgue problem. The package contains a LaTeX manuscript, proof
-  notes, exact symbolic Python checks, independent R tests, and automated build
-  and preflight workflows.
+  Blaschke-Lebesgue problem. The package contains a LaTeX manuscript, expanded
+  proof notes, exact symbolic Python checks, independent R tests, and automated
+  build and preflight workflows. The result is a non-peer-reviewed research
+  draft seeking independent mathematical verification.
 keywords:
   - "bodies of constant width"
   - "Blaschke-Lebesgue problem"
@@ -28,6 +33,10 @@ preferred-citation:
     - family-names: "Swihart"
       given-names: "Bruce J."
   year: 2026
+  version: "0.1.0"
+  date-released: "2026-09-06"
+  status: preprint
+  url: "https://github.com/swihart/minvol-degree3-spectral-bound/releases/tag/v0.1.0"
   license: CC-BY-4.0
   notes: >-
     AI-assisted, non-peer-reviewed research draft seeking independent

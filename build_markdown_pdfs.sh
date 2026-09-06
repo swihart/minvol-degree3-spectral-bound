@@ -6,7 +6,7 @@ cd "$ROOT"
 
 # Fix PDF metadata timestamps so repeated builds from the same sources are
 # byte-for-byte reproducible. Callers may override this value explicitly.
-export SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH:-1788307200}
+export SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH:-1788652800}
 export FORCE_SOURCE_DATE=${FORCE_SOURCE_DATE:-1}
 
 OUT_ROOT=${1:-rendered/markdown}

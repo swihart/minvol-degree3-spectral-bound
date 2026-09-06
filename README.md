@@ -1,12 +1,16 @@
-# Degree-3 spectral refinement: research-draft verification package
+# Degree-3 spectral refinement: public research draft and verification package
 
-**Author:** Bruce J. Swihart  
-**AI system disclosed:** OpenAI ChatGPT (GPT-5.6 Pro), accessed August-September 2026
+**Release:** [v0.1.0](https://github.com/swihart/minvol-degree3-spectral-bound/releases/tag/v0.1.0) (September 6, 2026)\
+**Author:** Bruce J. Swihart\
+**Status:** AI-assisted, non-peer-reviewed research draft seeking independent mathematical verification\
+**Canonical repository:** [github.com/swihart/minvol-degree3-spectral-bound](https://github.com/swihart/minvol-degree3-spectral-bound)\
+**AI system disclosed:** OpenAI ChatGPT (GPT-5.6 Sol Pro), accessed August-September 2026
 
-This is a **private, pre-release verification project** for a candidate
-refinement of Nishioka's lower bound for the three-dimensional
-Blaschke--Lebesgue problem. The repository now contains an integrated LaTeX
-research draft, but it is not yet ready for public release.
+This repository is the public research and verification package for version
+`v0.1.0` of a proposed refinement of Nishioka's lower bound for the
+three-dimensional Blaschke--Lebesgue problem. The package is designed to make
+the argument, exact algebra, numerical cross-checks, and verification boundary
+easy to inspect. It is not peer reviewed or independently verified.
 
 ## Candidate coefficient
 
@@ -84,34 +88,37 @@ all remaining harmonic energy at the smaller coefficient `1/58`.
 - The complete proof has been merged into a LaTeX manuscript in
   `paper/degree3_spectral_refinement.tex`; the tracked PDF was built and
   visually inspected in this project environment.
-- A fresh clone of commit
+- The named author completed a structured understanding review, approved the
+  revised manuscript and supporting package, and authorized preparation of the
+  public `v0.1.0` release candidate.
+- Release version, date, repository URLs, citation metadata, and public-facing
+  status language are fixed and checked automatically.
+- An initial fresh clone of commit
   `96cea57275070f21babf30477ab1b128ec0f5eb6` reproduced every check and build
   and left the tracked working tree byte-clean; see `CLEAN_CLONE_CHECK.md`.
+  The exact `v0.1.0` release-candidate commit is tested again before tagging.
 
-## What remains before public release
+## Release and verification status
 
-- Have the named author inspect and approve the revised manuscript and total package.
-- Perform a final release-candidate audit and rerun the clean-clone check after
-  all release-specific metadata is fixed.
-- At the first public release, add the public repository URL, release version,
-  and release date to `CITATION.cff`.
-- Obtain outside mathematical review after the first public research-draft
-  release.
+Version `v0.1.0` is the initial public research draft. Before tagging, the
+exact release-candidate commit must pass all three hosted GitHub Actions jobs on
+`main` and a final clean-clone reproduction. That same commit is then tagged
+`v0.1.0`; the tag-triggered workflow must also pass before the GitHub release is
+published. The release page records the tested commit and final result.
 
-The hosted GitHub Actions workflow passes all three jobs. A separate local
-fresh-clone run also passed at commit
-`96cea57275070f21babf30477ab1b128ec0f5eb6` and left the rebuilt tracked tree
-byte-clean. Authorship, AI-provenance, citation, and licensing metadata are
-included in the repository.
+The internal author-understanding review, manuscript review, proof audit,
+metadata preparation, and reproducibility work are complete for this release
+candidate. The principal outstanding scientific gate is review of the complete
+proof by an independent subject-matter expert. Peer review has not occurred.
 
-See `proof/PROOF_LEDGER.md`, `proof/CLAIM_DEPENDENCIES.md`,
-`proof/PROOF_AUDIT.md`, `proof/BRIDGE_LEMMAS.md`, and
-`proof/DEGREE3_TENSOR_IDENTITY.md`.
+See [the release notes](RELEASE_NOTES.md), `proof/PROOF_LEDGER.md`,
+`proof/CLAIM_DEPENDENCIES.md`, `proof/PROOF_AUDIT.md`,
+`proof/BRIDGE_LEMMAS.md`, and `proof/DEGREE3_TENSOR_IDENTITY.md`.
 
 ## Automated verification and reproducibility
 
 The workflow in [`.github/workflows/verification.yml`](.github/workflows/verification.yml)
-runs on pushes to `main`, pull requests, and manual dispatch. It uses separate
+runs on pushes to `main`, version tags, pull requests, and manual dispatch. It uses separate
 Ubuntu jobs to:
 
 - install the declared Python dependencies and run every exact and numerical
@@ -132,15 +139,18 @@ citation metadata, and licensing declarations.
 - [Recorded clean-clone verification](CLEAN_CLONE_CHECK.md)
 - [Licensing notice](LICENSE)
 - [Citation metadata](CITATION.cff)
+- [Release notes for v0.1.0](RELEASE_NOTES.md)
 
 ## Typeset PDF versions of the Markdown documentation
 
 GitHub does not consistently render the repository's single-backslash LaTeX
 math delimiters.  Typeset PDF counterparts are tracked under
 `rendered/markdown/`, with the source directory structure preserved.  The
-Markdown files remain the editable source of truth.
+Markdown files are the editable source files; the PDFs are rendered counterparts
+provided for convenient reading.
 
 - [Repository overview PDF](rendered/markdown/README.pdf)
+- [Release notes PDF](rendered/markdown/RELEASE_NOTES.pdf)
 - [AI assistance and provenance PDF](rendered/markdown/AI_ASSISTANCE.pdf)
 - [Recorded clean-clone verification PDF](rendered/markdown/CLEAN_CLONE_CHECK.pdf)
 - [Reproducibility guide PDF](rendered/markdown/REPRODUCIBILITY.pdf)

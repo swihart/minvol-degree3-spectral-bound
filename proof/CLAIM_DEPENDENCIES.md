@@ -1,5 +1,9 @@
 # Claim dependency graph
 
+**Release:** v0.1.0 (September 6, 2026)\
+**Status:** AI-assisted, non-peer-reviewed research draft seeking independent
+mathematical verification
+
 ## Candidate theorem
 
 For every three-dimensional convex body of constant width `d`,
@@ -17,8 +21,8 @@ The integrated proof is in:
 paper/degree3_spectral_refinement.tex
 ```
 
-The repository does **not** yet label the statement a peer-reviewed,
-independently verified, or certified theorem.
+The repository does **not** label the statement a peer-reviewed,
+independently verified, certified, or accepted theorem.
 
 ## Dependencies
 

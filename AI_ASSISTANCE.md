@@ -1,12 +1,13 @@
 # AI assistance and provenance
 
-**Named author:** Bruce J. Swihart  
-**AI system used:** OpenAI ChatGPT (GPT-5.6 Pro)  
+**Release:** v0.1.0 (September 6, 2026)\
+**Named author:** Bruce J. Swihart\
+**AI system used:** OpenAI ChatGPT (GPT-5.6 Sol Pro)\
 **Access period:** August-September 2026
 
 ## Scope of AI assistance
 
-OpenAI ChatGPT (GPT-5.6 Pro) was used extensively during this project to:
+OpenAI ChatGPT (GPT-5.6 Sol Pro) was used extensively during this project to:
 
 - discuss and compare possible proof strategies;
 - derive, reorganize, and check mathematical calculations;

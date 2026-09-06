@@ -22,6 +22,8 @@ grep -Fx 'README.md' "$source_list" >/dev/null || \
   fail 'README.md was not discovered'
 grep -Fx 'proof/DEGREE3_TENSOR_IDENTITY.md' "$source_list" >/dev/null || \
   fail 'proof/DEGREE3_TENSOR_IDENTITY.md was not discovered'
+grep -Fx 'RELEASE_NOTES.md' "$source_list" >/dev/null || \
+  fail 'RELEASE_NOTES.md was not discovered'
 
 if grep -F '.venv/' "$source_list" >/dev/null; then
   cat "$source_list" >&2

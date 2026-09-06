@@ -30,30 +30,32 @@ Status labels:
 | A1 | Final exact coefficient, decimal, and strict improvement | SymPy exact arithmetic; `BRIDGE_LEMMAS.md`, Theorem 6.2 and Corollary 6.3 | Exact-code checked; hand-checked; integrated manuscript drafted |
 | R1 | Passage to nonsmooth bodies | Nishioka's approximation lemma; `BRIDGE_LEMMAS.md`, Theorem 7.1 | Sourced; formal write-up drafted; needs external review |
 | P1 | Complete paper source compiles without unresolved references | `paper/degree3_spectral_refinement.tex`; `build_paper.sh` | Author-review revision integrated; runtime-tested in project environment |
-| P2 | PDF has no visible clipping, overlap, or broken glyphs | Nine rendered pages inspected at 180 dpi after author-review revision | Render-checked |
-| P3 | Named-author understanding review of the proof architecture | Twelve-question structured review and resulting exposition changes | Completed at the conceptual level; revised manuscript awaits final author approval |
+| P2 | PDF has no visible clipping, overlap, or broken glyphs | Ten release-candidate pages inspected at 180 dpi; PDF preflight passed | Render-checked |
+| P3 | Named-author understanding review of the proof architecture | Twelve-question structured review and resulting exposition changes | Completed; revised manuscript and supporting package approved for release-candidate preparation |
 | C1 | Hosted clean-environment checks for Python, R, the paper, metadata, and Markdown PDFs | `.github/workflows/verification.yml`; three green jobs confirmed for the tested commit on September 4, 2026 | Hosted CI passed |
 | C2 | Fresh-clone reproduction of all checks and tracked builds | `CLEAN_CLONE_CHECK.md`; commit `96cea5727507` | Fresh-clone passed; rebuilt tracked tree byte-clean |
 | D1 | Public-facing verification and reproduction instructions | `VERIFICATION_STATUS.md`; `REPRODUCIBILITY.md` | Drafted and integrated |
-| M1 | Authorship, AI provenance, citation, and licensing metadata | `AI_ASSISTANCE.md`; `CITATION.cff`; `LICENSE`; manuscript declaration; metadata preflight | Drafted and integrated; public release URL/version pending |
+| M1 | Authorship, AI provenance, citation, licensing, version, date, and public URLs | `AI_ASSISTANCE.md`; `CITATION.cff`; `LICENSE`; `VERSION`; `RELEASE_DATE`; manuscript declaration; metadata and release preflights | Integrated for v0.1.0 |
+| RC1 | Public v0.1.0 release candidate | Versioned paper, public README wording, release notes, URLs, date, and tag-aware workflow | Prepared; exact commit still requires three green hosted jobs and final clean-clone pass before tagging |
 | L1 | Exact constant/decimal not found in a targeted web search | Search terms and limitations recorded in `PROOF_AUDIT.md` | Preliminary only; not a systematic novelty review |
 | E1 | Full theorem has been independently reviewed | None yet | Needs external review |
 
 ## Current bottleneck
 
-The internal proof chain, integrated manuscript, hosted verification workflow,
-authorship/provenance metadata, and an initial clean-clone reproduction are
-complete. The remaining internal gates are:
+The internal proof chain, named-author review, integrated manuscript, public
+release metadata, hosted verification workflow, and an initial clean-clone
+reproduction are complete. The remaining internal gate is to commit and push
+the v0.1.0 release candidate, obtain three green hosted jobs on `main`, and run
+one final clean-clone test on that exact commit. No tracked file may change
+between the successful final test and creation of the `v0.1.0` tag. The
+three-job tag workflow must then pass before the GitHub release is published.
 
-1. have the named author inspect and approve the revised manuscript and total package;
-2. complete the release-candidate audit and rerun the clean-clone check after
-   release-specific metadata is fixed; and
-3. add the public repository URL, release version, and release date to
-   `CITATION.cff` when the first public release is prepared.
+After the tag is public, independent subject-matter review is the principal
+scientific next step.
 
 ## Release rule
 
-Do not describe the candidate bound as peer reviewed, certified, or
-independently verified while `E1` remains open. The first public GitHub release
-may be labeled **public research draft seeking verification** after all internal
-gates above pass.
+Do not describe the candidate bound as peer reviewed, certified, independently
+verified, or accepted while `E1` remains open. Release `v0.1.0` may be labeled
+**public research draft seeking independent mathematical verification** only
+after the exact tagged commit has passed the hosted and clean-clone gates.

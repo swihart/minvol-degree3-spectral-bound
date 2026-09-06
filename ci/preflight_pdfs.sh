@@ -69,8 +69,16 @@ grep -F "0.3836027047090677" "$paper_text" >/dev/null || \
   fail "paper PDF does not contain the candidate coefficient"
 grep -F "AI-assisted" "$paper_text" >/dev/null || \
   fail "paper PDF does not contain the AI-assistance disclosure"
-grep -F "GPT-5.6 Pro" "$paper_text" >/dev/null || \
+grep -F "GPT-5.6 Sol Pro" "$paper_text" >/dev/null || \
   fail "paper PDF does not identify the AI model"
+grep -F "v0.1.0" "$paper_text" >/dev/null || \
+  fail "paper PDF does not contain the release version"
+grep -F "September 6, 2026" "$paper_text" >/dev/null || \
+  fail "paper PDF does not contain the release date"
+grep -F "github.com/swihart/minvol-degree3-spectral-bound" "$paper_text" >/dev/null || \
+  fail "paper PDF does not contain the canonical repository URL"
+grep -F "releases/tag/v0.1.0" "$paper_text" >/dev/null || \
+  fail "paper PDF does not contain the versioned release URL"
 
 sh tools/markdown_pdf/list_markdown_sources.sh > "$markdown_sources"
 

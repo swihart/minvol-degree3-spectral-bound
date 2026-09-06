@@ -15,9 +15,9 @@
   linkcolor=blue,
   citecolor=blue,
   urlcolor=blue,
-  pdftitle={A Degree-Three Spectral Refinement of Nishioka's Lower Bound},
+  pdftitle={A Degree-Three Spectral Refinement of Nishioka's Lower Bound (v0.1.0)},
   pdfauthor={Bruce J. Swihart},
-  pdfsubject={Three-dimensional Blaschke--Lebesgue problem},
+  pdfsubject={Public research draft v0.1.0, released 2026-09-06; three-dimensional Blaschke--Lebesgue problem},
   pdfkeywords={constant width, Blaschke--Lebesgue problem, spherical harmonics, convex geometry}
 }
 
@@ -41,9 +41,12 @@
 \newcommand{\norm}[1]{\left\lVert #1\right\rVert}
 \newcommand{\abs}[1]{\left\lvert #1\right\rvert}
 
+\newcommand{\releaseversion}{v0.1.0}
+\newcommand{\releasedate}{September 6, 2026}
+
 \title[A degree-three spectral refinement]{A Degree-Three Spectral Refinement of Nishioka's Lower Bound for the Three-Dimensional Blaschke--Lebesgue Problem}
 \author{Bruce J. Swihart}
-\date{September 2, 2026}
+\date{Version \releaseversion\ -- \releasedate}
 \subjclass[2020]{52A20, 52A40, 33C55}
 \keywords{Bodies of constant width, Blaschke--Lebesgue problem, spherical harmonics, convex geometry}
 
@@ -77,9 +80,10 @@ spectral mechanism rather than the numerically strongest current claim.
 \small\textbf{Verification status.}
 This manuscript and its accompanying code form a non-peer-reviewed research
 draft. Exact computer algebra supports the displayed tensor identities, but no
-independent subject-matter expert has yet reviewed the complete proof. The
-repository should therefore be cited as a draft seeking verification, not as a
-certified or peer-reviewed theorem.
+independent subject-matter expert has yet reviewed the complete proof. This is
+release \releaseversion, dated \releasedate. The repository should therefore
+be cited as a draft seeking verification, not as a certified or peer-reviewed
+theorem.
 \end{minipage}}
 \end{center}
 
@@ -258,30 +262,19 @@ $\ell\ge5$. Orthogonality therefore gives
  E(h)\le \frac1{22}N_3+\frac1{58}(N-N_3)
  =\frac1{58}N+\frac9{319}N_3.
 \]
-\end{proof}
 Since
 \[
- \frac{9}{319}
- =
- \frac{1}{22}-\frac{1}{58},
+ \frac9{319}=\frac1{22}-\frac1{58},
 \]
-the estimate may equivalently be written as
+the same estimate may be written as
 \[
- E(h)
- \le
- \frac1{22}N-\frac9{319}(N-N_3).
+ E(h)\le \frac1{22}N-\frac9{319}(N-N_3).
 \]
-Thus, at the spectral-splitting stage, the reduction relative to
-Nishioka's bound $E(h)\le N/22$ is exactly the nonnegative correction
-\[
- \frac9{319}(N-N_3).
-\]
-This correction is positive whenever higher-degree energy is present
-and vanishes when $N=N_3$, equivalently when $h\in\Harm_3$.  The
-pure degree-three case is treated separately below by the improved
-budget estimate for $N_3$.
-
-
+Thus the reduction relative to Nishioka's spectral bound $E(h)\le N/22$ is
+exactly the nonnegative correction $9(N-N_3)/319$. It is positive whenever
+higher-degree energy is present and vanishes in the pure degree-three case,
+which is treated separately below by the improved budget estimate for $N_3$.
+\end{proof}
 
 \begin{remark}[Continuing the spectral split]\label{rem:degree-five}
 Let
@@ -689,6 +682,16 @@ computer-assisted estimates \cite{Nishioka2027}.
 
 \section{Reproducibility and disclosure}
 
+\subsection*{Supporting materials and code availability}
+The canonical public repository for this work is
+\url{https://github.com/swihart/minvol-degree3-spectral-bound}. The versioned
+release corresponding to this manuscript is
+\url{https://github.com/swihart/minvol-degree3-spectral-bound/releases/tag/v0.1.0}.
+Release \releaseversion\ contains the manuscript source and PDF, expanded proof
+documentation, exact symbolic Python calculations, independent base-R checks,
+build and preflight scripts, and the verification and AI-provenance records
+described below.
+
 The accompanying repository separates the mathematical derivation from the
 computational checks. The exact Python/SymPy scripts:
 \begin{itemize}[leftmargin=2em]
@@ -706,7 +709,7 @@ errors; they do not substitute for independent mathematical review.
 
 \subsection*{Declaration of AI assistance}
 During the preparation of this work, the author used OpenAI ChatGPT
-(GPT-5.6 Pro, accessed August--September 2026) extensively to explore proof
+(GPT-5.6 Sol Pro, accessed August--September 2026) extensively to explore proof
 strategies, carry out and cross-check symbolic calculations, draft exposition,
 and prepare reproducibility code. The exact symbolic checks, independent Python
 and R numerical tests, and their recorded outputs are preserved in the

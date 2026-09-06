@@ -4,7 +4,7 @@ set -eu
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 cd "$ROOT"
 
-export SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH:-1788307200}
+export SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH:-1788652800}
 export FORCE_SOURCE_DATE=${FORCE_SOURCE_DATE:-1}
 
 cd paper

@@ -9,8 +9,8 @@ fail() {
   exit 1
 }
 
-for file in AI_ASSISTANCE.md CITATION.cff LICENSE \
-  paper/degree3_spectral_refinement.tex VERIFICATION_STATUS.md; do
+for file in AI_ASSISTANCE.md CITATION.cff LICENSE VERSION RELEASE_DATE \
+  RELEASE_NOTES.md paper/degree3_spectral_refinement.tex VERIFICATION_STATUS.md; do
   [ -s "$file" ] || fail "missing or empty file: $file"
 done
 
@@ -18,9 +18,9 @@ grep -F "Bruce J. Swihart" paper/degree3_spectral_refinement.tex >/dev/null || \
   fail "paper source does not contain the full author name"
 grep -F "pdfauthor={Bruce J. Swihart}" paper/degree3_spectral_refinement.tex >/dev/null || \
   fail "paper PDF metadata author is inconsistent"
-grep -F "GPT-5.6 Pro" paper/degree3_spectral_refinement.tex >/dev/null || \
+grep -F "GPT-5.6 Sol Pro" paper/degree3_spectral_refinement.tex >/dev/null || \
   fail "paper source does not identify the AI model"
-grep -F "GPT-5.6 Pro" AI_ASSISTANCE.md >/dev/null || \
+grep -F "GPT-5.6 Sol Pro" AI_ASSISTANCE.md >/dev/null || \
   fail "AI_ASSISTANCE.md does not identify the AI model"
 grep -F 'given-names: "Bruce J."' CITATION.cff >/dev/null || \
   fail "CITATION.cff does not contain the author's given names"
@@ -44,6 +44,11 @@ required = (
     "authors:",
     "preferred-citation:",
     "type: unpublished",
+    'version: "0.1.0"',
+    'date-released: "2026-09-06"',
+    "status: preprint",
+    "repository-code: ",
+    "releases/tag/v0.1.0",
 )
 missing = [item for item in required if item not in text]
 if missing:

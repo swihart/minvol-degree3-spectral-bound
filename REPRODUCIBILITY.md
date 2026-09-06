@@ -1,5 +1,9 @@
 # Reproducibility guide
 
+**Release:** v0.1.0 (September 6, 2026)\
+**Canonical repository:** https://github.com/swihart/minvol-degree3-spectral-bound\
+**Versioned release:** https://github.com/swihart/minvol-degree3-spectral-bound/releases/tag/v0.1.0
+
 This guide explains how to reproduce the symbolic checks, numerical
 cross-checks, manuscript build, and typeset Markdown documentation from a fresh
 clone.
@@ -32,14 +36,17 @@ The complete environment and interpretation are recorded in
 
 ## Fresh-clone procedure
 
-Clone the repository and enter its root directory:
+To reproduce the fixed v0.1.0 release, clone the tag and enter the repository:
 
 ```sh
-git clone YOUR_REPOSITORY_URL
+git clone --branch v0.1.0 --depth 1 \
+  https://github.com/swihart/minvol-degree3-spectral-bound.git
 cd minvol-degree3-spectral-bound
 ```
 
-Replace `YOUR_REPOSITORY_URL` with the repository's actual clone URL.
+To inspect later development instead, clone the default branch without the
+`--branch v0.1.0` option. Results should always be reported with the exact tag
+or commit used.
 
 ### 1. Python checks
 
@@ -125,10 +132,11 @@ sha256sum -c rendered/markdown/SHA256SUMS.txt
 ### 5. Metadata and PDF preflight
 
 Check consistency of the author name, AI-system identification, citation file,
-and licensing declaration:
+licensing declaration, release version, release date, and public URLs:
 
 ```sh
 ./ci/preflight_metadata.sh
+./ci/preflight_release.sh
 ```
 
 With Poppler installed, validate the manuscript and every Markdown-derived PDF:
@@ -162,11 +170,26 @@ are rendered counterparts provided for convenient reading.
 
 ## GitHub Actions
 
-The workflow runs automatically on pushes to `main`, pull requests, and manual
-requests from the Actions tab. It stores the Python and R logs and the generated
+The workflow runs automatically on pushes to `main`, pushes of version tags, pull
+requests, and manual requests from the Actions tab. It stores the Python and R logs and the generated
 PDFs as temporary workflow artifacts for inspection. A green run means that the
 repository's checks and builds completed in the declared environments; it is
 not an independent proof review.
+
+## Release-candidate reproduction
+
+Before the `v0.1.0` tag is created, the exact release-candidate commit is
+required to pass:
+
+1. all three GitHub Actions jobs on `main`;
+2. the local clean-clone helper against `origin/main`;
+3. the release metadata preflight; and
+4. a final check that rebuilding leaves the tracked checkout clean.
+
+The tag must point to the same commit that passed these checks, with no tracked
+change in between. Pushing the tag starts the same three-job workflow for the
+tagged ref; that run must also pass before the GitHub release is published. The
+release page should record the commit hash and the final clean-clone result.
 
 ## Reporting a discrepancy
 

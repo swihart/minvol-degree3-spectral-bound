@@ -1,8 +1,17 @@
 # Recorded clean-clone verification
 
-**Result:** PASS with the full Poppler PDF preflight delegated to GitHub Actions  
-**UTC timestamp:** 2026-09-04 10:05:19  
-**Tested commit:** `96cea57275070f21babf30477ab1b128ec0f5eb6`  
+**Record type:** Pre-release baseline retained with release v0.1.0\
+**Release date:** September 6, 2026\
+**Canonical repository:** https://github.com/swihart/minvol-degree3-spectral-bound
+
+This record predates the final v0.1.0 release-candidate commit and is retained
+as reproducibility evidence. The exact v0.1.0 commit is tested again after all
+release metadata is committed and before the tag is created; that final result
+is recorded on the GitHub release page.
+
+**Result:** PASS with the full Poppler PDF preflight delegated to GitHub Actions\
+**UTC timestamp:** 2026-09-04 10:05:19\
+**Tested commit:** `96cea57275070f21babf30477ab1b128ec0f5eb6`\
 **Repository:** `swihart/minvol-degree3-spectral-bound`
 
 ## Purpose

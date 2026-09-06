@@ -2,7 +2,8 @@
 
 **Initial audit date:** 2026-09-02
 
-**Author-review update:** 2026-09-05
+**Author-review update:** 2026-09-05\
+**Release-candidate update:** 2026-09-06
 
 **Scope:** `proof/BRIDGE_LEMMAS.md`, `proof/DEGREE3_TENSOR_IDENTITY.md`,
 the exact Python checks, the independent R checks, and the current integrated
@@ -313,7 +314,7 @@ paper/degree3_spectral_refinement.pdf
 
 The PDF was built with `latexmk`, rendered at 180 dpi, and visually inspected
 page by page. The audit found no clipped text, overlapping equations, broken
-glyphs, or unresolved references. The revised PDF contains nine US-letter pages and embedded fonts.
+glyphs, or unresolved references. The release-candidate PDF contains the version and release date in its visible front matter and metadata. It has ten pages; the release build and PDF preflight confirm valid structure, extractable text, and embedded fonts.
 
 The author-review revision adds a proof roadmap, an explicit derivation of the
 normalization in equation (14), a degree-five spectral-splitting remark, a
@@ -344,35 +345,37 @@ This was not a systematic literature review and must not be treated as a proof
 of novelty. A specialist may know relevant representation-theoretic or invariant
 inequalities under different notation.
 
-## 6. Clean-clone verification and remaining release gates
+## 6. Clean-clone verification and release-candidate status
 
 A separate clone of commit
 `96cea57275070f21babf30477ab1b128ec0f5eb6` successfully ran the exact Python
 suite, the independent R suite, the paper build, the Markdown-PDF build, and the
 metadata and checksum checks. The rebuilt tracked working tree remained
 byte-clean. Full Poppler PDF preflight was unavailable on the local Mac and was
-delegated to the green GitHub Actions document job. The detailed record is in
-`CLEAN_CLONE_CHECK.md`.
+delegated to the green GitHub Actions document job. The detailed baseline record
+is in `CLEAN_CLONE_CHECK.md`.
 
-The remaining gates before a public release are:
+The named author has completed the structured understanding review, read and
+approved the revised manuscript and supporting package, and authorized
+preparation of release `v0.1.0`. The release version, release date, canonical
+repository URL, versioned release URL, public README wording, citation metadata,
+and release notes are fixed in the release-candidate files.
 
-1. Have the named author inspect and approve the revised manuscript and total package.
-2. Complete a release-candidate audit and rerun the clean-clone check after all
-   release-specific metadata has been fixed.
-3. Add the public repository URL, release version, and release date to
-   `CITATION.cff` when preparing the first release.
-4. Seek independent mathematical review after the first public research-draft
-   release.
+The remaining internal gate is procedural: commit and push the release
+candidate, obtain three green hosted jobs, then run a final clean-clone test on
+that exact commit. If it passes, no tracked file may change before the commit is
+tagged `v0.1.0`. The tested commit and final result are to be recorded on the
+GitHub release page.
 
 The exact Python and R checks, hosted three-job GitHub Actions workflow,
 research-paper build, Markdown-PDF build, metadata declarations, PDF preflight,
-and initial clean-clone reproduction have passed. They do not replace
-independent subject-matter review.
+and initial clean-clone reproduction do not replace independent subject-matter
+review.
 
 ## Release recommendation
 
-Keep the repository private until the named author completes the manuscript
-review and the release-candidate audit is complete. Then prepare a `v0.1.0`
-public research-draft release, update the release-specific citation metadata,
-run the final clean-clone gate, and preserve the verification language stated
-above.
+Keep the repository private through the release-candidate commit, hosted checks,
+and final clean-clone test. After those checks pass, tag the exact tested commit,
+make the repository public, and create the `v0.1.0` GitHub release using the
+status language preserved throughout this package. Independent mathematical
+review remains the principal scientific next step.

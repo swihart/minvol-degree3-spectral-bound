@@ -1,8 +1,11 @@
 # Verification status
 
-**Last updated:** September 4, 2026  
-**Named author:** Bruce J. Swihart  
-**AI system disclosed:** OpenAI ChatGPT (GPT-5.6 Pro), accessed August-September 2026
+**Release:** v0.1.0 (September 6, 2026)\
+**Last updated:** September 6, 2026\
+**Named author:** Bruce J. Swihart\
+**AI system disclosed:** OpenAI ChatGPT (GPT-5.6 Sol Pro), accessed August-September 2026\
+**Canonical repository:** https://github.com/swihart/minvol-degree3-spectral-bound\
+**Versioned release:** https://github.com/swihart/minvol-degree3-spectral-bound/releases/tag/v0.1.0
 
 **Current designation:** AI-assisted, non-peer-reviewed research draft seeking
 independent mathematical verification.
@@ -25,7 +28,7 @@ This coefficient is larger than Nishioka's published coefficient
 newer public HYRA claims. The proposed contribution is the independent
 degree-3 spectral mechanism, not the strongest currently claimed coefficient.
 
-## Evidence currently in the repository
+## Evidence in release v0.1.0
 
 | Layer | Evidence | Status |
 |---|---|---|
@@ -35,11 +38,11 @@ degree-3 spectral mechanism, not the strongest currently claimed coefficient.
 | Pairing enumeration | All contraction pairings for the six quartic moments counted exhaustively | Passed independently in Python and R |
 | Numerical convention checks | Deterministic quadrature, random tensors, and rotational tests | Passed independently in Python and R |
 | Human-readable proof | Bridge lemmas and the degree-3 tensor identity are written line by line | Drafted and internally audited |
-| Integrated manuscript | Complete LaTeX research note compiles to PDF | Passed internally |
-| Hosted clean-environment checks | GitHub Actions runs Python, R, paper, Markdown-PDF, metadata, and PDF preflight checks | All three jobs passed for the tested commit |
+| Integrated manuscript | Complete LaTeX research note compiles to PDF | Passed internally and approved by the named author |
+| Hosted clean-environment checks | GitHub Actions runs Python, R, paper, Markdown-PDF, metadata, release, and PDF preflight checks | Required to pass on the exact release-candidate commit and version tag |
 | Fresh-clone reproducibility | A separate clone of commit `96cea5727507` ran all checks and builds | Passed; rebuilt tracked tree remained byte-clean |
 | Authorship and AI provenance | Full author name and the AI system, scope, access period, and limits are recorded | Documented |
-| Citation and licensing | `CITATION.cff` and separate prose/software license terms are present | Documented; release URL and version still pending |
+| Citation and licensing | `CITATION.cff`, release URLs, release version/date, and separate prose/software license terms are present | Documented for v0.1.0 |
 | External mathematical review | Review by an independent subject-matter expert | Not yet completed |
 | Peer review | Journal or conference peer review | Not yet completed |
 
@@ -53,8 +56,8 @@ The workflow in `.github/workflows/verification.yml` runs three jobs:
 
 1. exact and numerical Python checks;
 2. independent base-R checks; and
-3. clean builds and preflight checks of the manuscript, metadata, and all
-   Markdown-derived PDFs.
+3. clean builds and preflight checks of the manuscript, metadata, release
+   fields, and all Markdown-derived PDFs.
 
 A green workflow establishes that the checked computations, metadata checks,
 and document builds run successfully in the recorded CI environments. It does
@@ -69,6 +72,13 @@ and the resulting tracked working tree was clean. The local Mac lacked Poppler,
 so basic PDF and checksum checks were performed locally and the full PDF
 preflight was supplied by the green GitHub Actions document job. See
 [`CLEAN_CLONE_CHECK.md`](CLEAN_CLONE_CHECK.md).
+
+The exact v0.1.0 release-candidate commit must pass one additional clean-clone
+run after all versioned metadata is committed and before the tag is created.
+No tracked file may change between that successful test and creation of the tag.
+After the tag is pushed, the tag-triggered three-job workflow must also pass
+before the GitHub release is published. The release page should record the
+tested commit and final clean-clone result.
 
 ## Language approved for public use
 

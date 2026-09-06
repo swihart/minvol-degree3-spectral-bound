@@ -17,8 +17,9 @@ License: https://creativecommons.org/licenses/by/4.0/
 Suggested attribution:
 
   Bruce J. Swihart, "A Degree-Three Spectral Refinement of Nishioka's Lower
-  Bound for the Three-Dimensional Blaschke-Lebesgue Problem," research draft,
-  2026, together with the repository version or commit used.
+  Bound for the Three-Dimensional Blaschke-Lebesgue Problem," version v0.1.0,
+  public research draft, September 6, 2026,
+  https://github.com/swihart/minvol-degree3-spectral-bound/releases/tag/v0.1.0.
 
 2. SOFTWARE AND BUILD INFRASTRUCTURE
 
