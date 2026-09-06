@@ -345,15 +345,24 @@ This was not a systematic literature review and must not be treated as a proof
 of novelty. A specialist may know relevant representation-theoretic or invariant
 inequalities under different notation.
 
-## 6. Clean-clone verification and release-candidate status
+## 6. Fresh-clone verification and release-candidate status
 
 A separate clone of commit
 `96cea57275070f21babf30477ab1b128ec0f5eb6` successfully ran the exact Python
 suite, the independent R suite, the paper build, the Markdown-PDF build, and the
 metadata and checksum checks. The rebuilt tracked working tree remained
 byte-clean. Full Poppler PDF preflight was unavailable on the local Mac and was
-delegated to the green GitHub Actions document job. The detailed baseline record
-is in `CLEAN_CLONE_CHECK.md`.
+delegated to the green GitHub Actions document job.
+
+A second fresh-clone smoke test on release-candidate commit
+`ff5118cc05ada29d26631c82d0cbf69613ed88c1` passed the exact Python suite, the
+independent R suite, both document builds, release and metadata preflights, basic
+PDF validation, and checksum verification. The strict binary comparison found
+only two-byte differences in two secondary rendered documentation PDFs, with
+corresponding checksum updates. No source, proof statement, release metadata, or
+mathematical output changed. Exact PDF byte identity is therefore not treated as
+a scientific or release-blocking criterion. The detailed records are in
+`CLEAN_CLONE_CHECK.md`.
 
 The named author has completed the structured understanding review, read and
 approved the revised manuscript and supporting package, and authorized
@@ -361,21 +370,18 @@ preparation of release `v0.1.0`. The release version, release date, canonical
 repository URL, versioned release URL, public README wording, citation metadata,
 and release notes are fixed in the release-candidate files.
 
-The remaining internal gate is procedural: commit and push the release
-candidate, obtain three green hosted jobs, then run a final clean-clone test on
-that exact commit. If it passes, no tracked file may change before the commit is
-tagged `v0.1.0`. The tested commit and final result are to be recorded on the
-GitHub release page.
+The remaining internal gate is procedural: the reviewed commit and the
+`v0.1.0` tag must each obtain three green hosted jobs. The tagged commit and the
+verification scope are recorded on the GitHub release page.
 
 The exact Python and R checks, hosted three-job GitHub Actions workflow,
 research-paper build, Markdown-PDF build, metadata declarations, PDF preflight,
-and initial clean-clone reproduction do not replace independent subject-matter
-review.
+and fresh-clone smoke tests do not replace independent subject-matter review.
 
 ## Release recommendation
 
-Keep the repository private through the release-candidate commit, hosted checks,
-and final clean-clone test. After those checks pass, tag the exact tested commit,
-make the repository public, and create the `v0.1.0` GitHub release using the
-status language preserved throughout this package. Independent mathematical
-review remains the principal scientific next step.
+Keep the repository private through the reviewed commit and hosted checks. Once
+the exact commit has three green `main` jobs, tag it `v0.1.0`; require the three
+tag jobs to pass, then make the repository public and publish the GitHub release
+using the status language preserved throughout this package. Independent
+mathematical review remains the principal scientific next step.

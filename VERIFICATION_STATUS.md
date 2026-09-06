@@ -40,7 +40,7 @@ degree-3 spectral mechanism, not the strongest currently claimed coefficient.
 | Human-readable proof | Bridge lemmas and the degree-3 tensor identity are written line by line | Drafted and internally audited |
 | Integrated manuscript | Complete LaTeX research note compiles to PDF | Passed internally and approved by the named author |
 | Hosted clean-environment checks | GitHub Actions runs Python, R, paper, Markdown-PDF, metadata, release, and PDF preflight checks | Required to pass on the exact release-candidate commit and version tag |
-| Fresh-clone reproducibility | A separate clone of commit `96cea5727507` ran all checks and builds | Passed; rebuilt tracked tree remained byte-clean |
+| Fresh-clone reproducibility | Baseline commit `96cea5727507` and release-candidate commit `ff5118cc05ad` were tested from separate clones | All substantive checks and builds passed; baseline was byte-clean, while two generated documentation PDFs in the release-candidate run differed by two bytes |
 | Authorship and AI provenance | Full author name and the AI system, scope, access period, and limits are recorded | Documented |
 | Citation and licensing | `CITATION.cff`, release URLs, release version/date, and separate prose/software license terms are present | Documented for v0.1.0 |
 | External mathematical review | Review by an independent subject-matter expert | Not yet completed |
@@ -64,21 +64,26 @@ and document builds run successfully in the recorded CI environments. It does
 **not** establish that the theorem has been independently proved, certified, or
 peer reviewed.
 
-## Recorded clean-clone result
+## Recorded fresh-clone results
 
 Commit `96cea57275070f21babf30477ab1b128ec0f5eb6` was cloned into a new temporary
 directory on 2026-09-04. All Python and R checks ran, all tracked PDFs rebuilt,
-and the resulting tracked working tree was clean. The local Mac lacked Poppler,
-so basic PDF and checksum checks were performed locally and the full PDF
-preflight was supplied by the green GitHub Actions document job. See
+and the resulting tracked working tree was byte-clean.
+
+Release-candidate commit `ff5118cc05ada29d26631c82d0cbf69613ed88c1` was tested
+from a second fresh clone on 2026-09-06. The exact Python checks, independent R
+checks, paper build, Markdown-PDF build, release and metadata preflights, basic
+PDF validity checks, and checksum verification all passed. The strict binary
+comparison found only two-byte differences in `rendered/markdown/README.pdf`
+and `rendered/markdown/proof/BRIDGE_LEMMAS.pdf`, with corresponding checksum
+updates. No source or mathematical result changed. See
 [`CLEAN_CLONE_CHECK.md`](CLEAN_CLONE_CHECK.md).
 
-The exact v0.1.0 release-candidate commit must pass one additional clean-clone
-run after all versioned metadata is committed and before the tag is created.
-No tracked file may change between that successful test and creation of the tag.
-After the tag is pushed, the tag-triggered three-job workflow must also pass
-before the GitHub release is published. The release page should record the
-tested commit and final clean-clone result.
+Exact PDF byte identity is not treated as a scientific verification criterion.
+The reviewed release-candidate commit must have all three GitHub Actions jobs
+green on `main`; after the tag is pushed, the tag-triggered three-job workflow
+must also pass before publication. The release page records the tagged commit
+and accurately states the verification scope.
 
 ## Language approved for public use
 

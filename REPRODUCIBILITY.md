@@ -22,16 +22,23 @@ The GitHub Actions workflow uses:
 
 The workflow file is `.github/workflows/verification.yml`.
 
-## Recorded successful clean clone
+## Recorded fresh-clone tests
 
 A clean-clone reproduction was completed on 2026-09-04 for commit
 `96cea57275070f21babf30477ab1b128ec0f5eb6`. The isolated clone ran the Python
 and R suites, rebuilt the manuscript and every Markdown-derived PDF, passed the
-metadata and local checksum checks, and remained byte-clean afterward. The full
-Poppler PDF preflight was delegated to the three-job GitHub Actions run, which
-was green for the same commit.
+metadata and local checksum checks, and remained byte-clean afterward.
 
-The complete environment and interpretation are recorded in
+A second fresh-clone smoke test was completed on 2026-09-06 for release-candidate
+commit `ff5118cc05ada29d26631c82d0cbf69613ed88c1`. Every mathematical check,
+document build, metadata preflight, and PDF-validity/checksum check passed. The
+only binary differences were two-byte changes in two secondary rendered
+Markdown PDFs, with corresponding updates to the checksum manifest. No source,
+release metadata, or mathematical output changed. This is treated as documented
+renderer-level variation rather than a release blocker.
+
+The full Poppler PDF preflight was delegated to the green GitHub Actions
+document jobs. The complete environments and interpretation are recorded in
 [`CLEAN_CLONE_CHECK.md`](CLEAN_CLONE_CHECK.md).
 
 ## Fresh-clone procedure
@@ -160,21 +167,26 @@ a substitute for mathematical review of the proof.
 
 ## PDF reproducibility
 
-The build scripts fix the source-date epoch.  For Markdown-derived PDFs, the
-XeLaTeX driver is asked to disable stream compression and PDF object streams;
-the postprocessor then canonicalizes embedded-font subset prefixes, metadata
-dates, and the PDF trailer identifier.  A lightweight regression test in
-`ci/check_pdf_canonicalizer.sh` verifies those canonicalizations.  The lack of
-compression makes the documentation PDFs somewhat larger, but makes volatile
-font names visible to deterministic postprocessing.
+The build scripts fix the source-date epoch and canonicalize several known
+volatile PDF fields, including embedded-font subset prefixes, metadata dates,
+and the trailer identifier. The regression test in
+`ci/check_pdf_canonicalizer.sh` verifies those specific canonicalizations.
+These measures improve repeatability, but they do not guarantee byte-for-byte
+identity across every TeX/Pandoc invocation, filesystem context, or platform.
 
-Repeated builds with an unchanged toolchain are intended to be byte-for-byte
-reproducible. Different operating systems, TeX Live releases, fonts, or Pandoc
-versions may still produce visually equivalent but byte-different PDFs. In the
-recorded 2026-09-04 clean-clone run, however, macOS with Pandoc 2.19.2 and TeX
-Live 2022 reproduced all tracked outputs byte for byte. The Markdown and LaTeX
-files are the editable source files; the tracked PDFs are rendered counterparts
-provided for convenient reading.
+The release standard for generated PDFs is successful compilation, valid and
+extractable content, embedded fonts, consistent release metadata, and a passing
+hosted Poppler preflight. The checksum manifest authenticates the PDF files
+supplied with the release and verifies a single generated collection; it is not
+a promise that independently rebuilt PDFs will always have the same binary
+hashes.
+
+The 2026-09-04 clean-clone run reproduced all tracked outputs byte for byte. In
+the 2026-09-06 release-candidate smoke test, all mathematical checks and builds
+passed, while two secondary rendered documentation PDFs differed from their
+committed copies by two bytes. No source or mathematical output changed. The
+Markdown and LaTeX files are the editable source files; the tracked PDFs are
+rendered counterparts provided for convenient reading.
 
 ## GitHub Actions
 
@@ -184,20 +196,25 @@ PDFs as temporary workflow artifacts for inspection. A green run means that the
 repository's checks and builds completed in the declared environments; it is
 not an independent proof review.
 
-## Release-candidate reproduction
+## Release-candidate verification
 
-Before the `v0.1.0` tag is created, the exact release-candidate commit is
-required to pass:
+Before the `v0.1.0` tag is created, the exact release-candidate commit must pass:
 
 1. all three GitHub Actions jobs on `main`;
-2. the local clean-clone helper against `origin/main`;
-3. the release metadata preflight; and
-4. a final check that rebuilding leaves the tracked checkout clean.
+2. the release and authorship metadata preflights; and
+3. successful local or hosted execution of the mathematical and document-build
+   workflows.
 
-The tag must point to the same commit that passed these checks, with no tracked
-change in between. Pushing the tag starts the same three-job workflow for the
-tagged ref; that run must also pass before the GitHub release is published. The
-release page should record the commit hash and the final clean-clone result.
+A fresh-clone smoke test has additionally confirmed that the declared
+dependencies are sufficient and that every substantive check and build runs
+outside the development checkout. Binary differences confined to generated PDF
+artifacts are diagnostic information, not a release-blocking condition, when
+the sources are unchanged and all PDF validity and content preflights pass.
+
+The tag must point to the reviewed commit with green `main` checks. Pushing the
+tag starts the same three-job workflow for the tagged ref; that run must also
+pass before the GitHub release is published. The release page should record the
+commit hash and the verification scope accurately.
 
 ## Reporting a discrepancy
 

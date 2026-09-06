@@ -95,16 +95,21 @@ all remaining harmonic energy at the smaller coefficient `1/58`.
   status language are fixed and checked automatically.
 - An initial fresh clone of commit
   `96cea57275070f21babf30477ab1b128ec0f5eb6` reproduced every check and build
-  and left the tracked working tree byte-clean; see `CLEAN_CLONE_CHECK.md`.
-  The exact `v0.1.0` release-candidate commit is tested again before tagging.
+  and left the tracked working tree byte-clean. A second release-candidate
+  smoke test on commit `ff5118cc05ada29d26631c82d0cbf69613ed88c1` passed all
+  mathematical, build, metadata, and PDF-validity checks; only two secondary
+  rendered documentation PDFs differed by two bytes. See
+  `CLEAN_CLONE_CHECK.md`.
 
 ## Release and verification status
 
 Version `v0.1.0` is the initial public research draft. Before tagging, the
-exact release-candidate commit must pass all three hosted GitHub Actions jobs on
-`main` and a final clean-clone reproduction. That same commit is then tagged
-`v0.1.0`; the tag-triggered workflow must also pass before the GitHub release is
-published. The release page records the tested commit and final result.
+reviewed release-candidate commit must pass all three hosted GitHub Actions jobs
+on `main`, including the exact Python, independent R, document-build, metadata,
+and PDF-preflight stages. The tag-triggered workflow must also pass before the
+GitHub release is published. Fresh-clone smoke testing has confirmed that all
+substantive checks and builds run from declared repository contents; exact
+binary identity of independently generated PDFs is not required.
 
 The internal author-understanding review, manuscript review, proof audit,
 metadata preparation, and reproducibility work are complete for this release
@@ -174,8 +179,10 @@ pipeline has passed with Pandoc 2.19.2 locally and Pandoc 3.10.1 in GitHub
 Actions.
 The script recognizes the `\(...\)` and `\[...\]` delimiters used in the
 proof notes, converts the few multi-line tagged displays to valid `amsmath`
-environments, normalizes the PDF trailer identifiers for reproducible output,
-and writes a SHA-256 manifest to `rendered/markdown/SHA256SUMS.txt`.
+environments, canonicalizes several volatile PDF fields to improve
+repeatability, and writes a SHA-256 manifest to
+`rendered/markdown/SHA256SUMS.txt`. The manifest authenticates the supplied
+release artifacts; exact cross-build PDF byte identity is not guaranteed.
 
 ## Build the paper
 

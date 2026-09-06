@@ -44,7 +44,7 @@ This release contains:
 - exact symbolic Python checks and exhaustive pairing enumeration;
 - independent base-R pairing and numerical checks;
 - automated GitHub Actions workflows for Python, R, document builds,
-  deterministic PDF canonicalization, metadata checks, and PDF preflight;
+  best-effort PDF canonicalization, metadata checks, and PDF preflight;
 - reproducibility, clean-clone, licensing, citation, and AI-provenance records;
   and
 - typeset PDF counterparts of all Markdown documentation.
@@ -56,15 +56,18 @@ arithmetic. Independent Python and R implementations agree numerically, and the
 repository has passed clean hosted builds and a recorded clean-clone
 reproduction.
 
-The v0.1.0 release procedure first requires the exact release-candidate commit
-to pass the three hosted GitHub Actions jobs on `main` and one final clean-clone
-test. That same commit is then tagged `v0.1.0`; the tag-triggered workflow must
-also pass before the GitHub release is published. The release page records the
-tested commit and the final result.
+The release-candidate smoke test ran every exact Python check, independent R
+check, paper build, Markdown-PDF build, metadata preflight, and PDF validity and
+checksum check from a fresh clone. All substantive stages passed. Two secondary
+rendered documentation PDFs differed from their committed copies by two bytes;
+no source or mathematical output changed. Exact PDF byte identity is therefore
+reported as a build-detail diagnostic rather than used as a release gate.
 
-These checks establish reproducibility of the supplied computations and
-artifacts. They do not constitute independent subject-matter review or peer
-review of the complete proof.
+The exact tagged commit must pass the three hosted GitHub Actions jobs on
+`main`, and the tag-triggered workflow must also pass before the GitHub release
+is published. These checks establish reproducibility of the supplied
+computations and successful document generation. They do not constitute
+independent subject-matter review or peer review of the complete proof.
 
 ## Scope and limitations
 

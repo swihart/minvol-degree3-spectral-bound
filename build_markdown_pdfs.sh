@@ -4,10 +4,12 @@ set -euo pipefail
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 cd "$ROOT"
 
-# Fix PDF metadata timestamps so repeated builds from the same sources are
-# byte-for-byte reproducible. Callers may override this value explicitly.
-# xdvipdfmx stream compression and object streams are disabled below so the
-# postprocessor can canonicalize embedded-font subset names as well as IDs.
+# Fix PDF metadata timestamps and canonicalize several known volatile fields.
+# This improves repeatability, but exact byte-for-byte identity is neither
+# guaranteed nor required across all TeX/Pandoc runs or platforms. Callers may
+# override the source-date value explicitly. xdvipdfmx stream compression and
+# object streams are disabled below so the postprocessor can inspect and
+# normalize embedded-font subset names as well as PDF IDs.
 export SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH:-1788652800}
 export FORCE_SOURCE_DATE=${FORCE_SOURCE_DATE:-1}
 
