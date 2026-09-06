@@ -160,13 +160,21 @@ a substitute for mathematical review of the proof.
 
 ## PDF reproducibility
 
-The build scripts fix the source-date epoch and normalize PDF trailer
-identifiers. Repeated builds with an unchanged toolchain are intended to be
-byte-for-byte reproducible. Different operating systems, TeX Live releases, fonts, or Pandoc versions may
-still produce visually equivalent but byte-different PDFs. In the recorded
-2026-09-04 clean-clone run, however, macOS with Pandoc 2.19.2 and TeX Live 2022
-reproduced all tracked outputs byte for byte. The Markdown and LaTeX files are the editable source files; the tracked PDFs
-are rendered counterparts provided for convenient reading.
+The build scripts fix the source-date epoch.  For Markdown-derived PDFs, the
+XeLaTeX driver is asked to disable stream compression and PDF object streams;
+the postprocessor then canonicalizes embedded-font subset prefixes, metadata
+dates, and the PDF trailer identifier.  A lightweight regression test in
+`ci/check_pdf_canonicalizer.sh` verifies those canonicalizations.  The lack of
+compression makes the documentation PDFs somewhat larger, but makes volatile
+font names visible to deterministic postprocessing.
+
+Repeated builds with an unchanged toolchain are intended to be byte-for-byte
+reproducible. Different operating systems, TeX Live releases, fonts, or Pandoc
+versions may still produce visually equivalent but byte-different PDFs. In the
+recorded 2026-09-04 clean-clone run, however, macOS with Pandoc 2.19.2 and TeX
+Live 2022 reproduced all tracked outputs byte for byte. The Markdown and LaTeX
+files are the editable source files; the tracked PDFs are rendered counterparts
+provided for convenient reading.
 
 ## GitHub Actions
 

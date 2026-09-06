@@ -6,6 +6,8 @@ cd "$ROOT"
 
 # Fix PDF metadata timestamps so repeated builds from the same sources are
 # byte-for-byte reproducible. Callers may override this value explicitly.
+# xdvipdfmx stream compression and object streams are disabled below so the
+# postprocessor can canonicalize embedded-font subset names as well as IDs.
 export SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH:-1788652800}
 export FORCE_SOURCE_DATE=${FORCE_SOURCE_DATE:-1}
 
@@ -45,6 +47,7 @@ sh "$SOURCE_LISTER" \
         --from='markdown+tex_math_single_backslash' \
         --standalone \
         --pdf-engine=xelatex \
+        --pdf-engine-opt='-output-driver=xdvipdfmx -z 0 -C 64' \
         --lua-filter="$TITLE_FILTER" \
         --lua-filter="$MATH_FILTER" \
         --include-in-header="$PREAMBLE" \

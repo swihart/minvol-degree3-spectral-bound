@@ -126,6 +126,9 @@ jobs:
       - name: Check Markdown source discovery
         run: ./ci/check_markdown_source_discovery.sh
 
+      - name: Check PDF canonicalizer
+        run: ./ci/check_pdf_canonicalizer.sh
+
       - name: Build Markdown-derived PDFs
         run: ./build_markdown_pdfs.sh
 

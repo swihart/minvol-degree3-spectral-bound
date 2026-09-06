@@ -44,7 +44,7 @@ This release contains:
 - exact symbolic Python checks and exhaustive pairing enumeration;
 - independent base-R pairing and numerical checks;
 - automated GitHub Actions workflows for Python, R, document builds,
-  metadata checks, and PDF preflight;
+  deterministic PDF canonicalization, metadata checks, and PDF preflight;
 - reproducibility, clean-clone, licensing, citation, and AI-provenance records;
   and
 - typeset PDF counterparts of all Markdown documentation.
